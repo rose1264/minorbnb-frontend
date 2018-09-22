@@ -1,21 +1,28 @@
-import React, { Component } from 'react';
-import logo from '../assets/svg/logo.svg';
+import React, { Fragment } from 'react';
 import '../assets/css/App.css';
+import { Route, Switch } from 'react-router-dom'
+import Listings from './Listings'
+import ListingDetail from './ListingDetail'
+import CreateListingForm from './CreateListingForm'
+import LoginForm from './LoginForm'
+import SignupForm from './SignupForm'
+import Profile from './Profile'
+import NavigationBar from './NavigationBar'
 
-class App extends Component {
-  render() {
+const App = props => {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+      <Fragment>
+        <NavigationBar />
+        <Switch>
+          <Route exact path="/login" component={LoginForm} />
+          <Route exact path="/signup" component={SignupForm} />
+          <Route exact path="/profile" component={Profile} />
+        </Switch>
+        {/* <CreateListingForm />
+          <Listings />
+          <ListingDetail /> */}
+      </Fragment>
+    )
 }
 
 export default App;

@@ -1,13 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './components/App';
-import registerServiceWorker from './registerServiceWorker';
-import store from './store'
+import React from 'react'
 import { Provider } from 'react-redux'
+import ReactDOM from 'react-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
+import 'semantic-ui-css/semantic.min.css'
 
-ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
-registerServiceWorker();
+
+import store from './store'
+import App from './components/App'
+import registerServiceWorker from './registerServiceWorker'
+
+ReactDOM.render(
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
+  document.getElementById('root')
+)
+registerServiceWorker()
 
 // touch src/components/SearchBar.js
 // touch src/components/Listings.js
