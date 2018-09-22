@@ -34,12 +34,6 @@ const withAuth = /*FUNCTION*/ (WrappedComponent) => {
     }
   }
 
-  const mapDispatchToProps = /*FUNCTION*/ (dispatch) => {
-    return {
-      fetchCurrentUser: () => dispatch(actions.fetchCurrentUser()), //dispatch is automagically provided by redux
-    }
-  }
-
   return connect(
     mapStateToProps,
     actions

@@ -1,3 +1,5 @@
+import { SELECT_LISTING, ADD_LISTING } from '../types'
+
 //testing data
 const initialState = {
   guest_id: 1,

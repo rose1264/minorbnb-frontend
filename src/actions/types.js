@@ -1,2 +1,0 @@
-export const SELECT_LISTING = 'SELECT_LISTING'
-export const ADD_LISTING = 'ADD_LISTING'

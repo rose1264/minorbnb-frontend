@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
+import { connect } from 'react-redux'
 import '../assets/css/App.css';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 import Listings from './Listings'
 import ListingDetail from './ListingDetail'
 import CreateListingForm from './CreateListingForm'
@@ -10,19 +11,29 @@ import Profile from './Profile'
 import NavigationBar from './NavigationBar'
 
 const App = props => {
-    return (
-      <Fragment>
-        <NavigationBar />
-        <Switch>
-          <Route exact path="/login" component={LoginForm} />
-          <Route exact path="/signup" component={SignupForm} />
-          <Route exact path="/profile" component={Profile} />
-        </Switch>
-        {/* <CreateListingForm />
+  const loggedIn = props.user.loggedIn
+
+  return (
+    <Fragment>
+      <NavigationBar />
+      <Switch>
+        <Route exact path="/login" component={LoginForm} />
+        <Route exact path="/signup" component={SignupForm} />
+        <Route exact path="/profile" component={Profile} />
+      </Switch>
+      { loggedIn ? (
+        <Fragment>
+          <CreateListingForm />
           <Listings />
-          <ListingDetail /> */}
-      </Fragment>
-    )
+          <ListingDetail />
+        </Fragment>
+      ) : null}
+
+
+    </Fragment>
+  )
 }
 
-export default App;
+const mapStateToProps = ({ usersReducer: user }) => ({ user })
+
+export default withRouter(connect(mapStateToProps)(App))

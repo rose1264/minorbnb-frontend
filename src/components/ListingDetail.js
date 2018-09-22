@@ -17,7 +17,7 @@ const ListingDetail = props => {
 
 function mapStateToProps(state) {
   return {
-    listing: state.currentListing
+    listing: state.listingsReducer.currentListing
   }
 }
 

@@ -1,10 +1,10 @@
+import { AUTHENTICATING_USER, SET_CURRENT_USER, FAILED_LOGIN, LOG_OUT } from '../types'
+
 export const loginUser = (name, password) => {
-  return (dispatch) => { //thunk
-    // console.log(process.env.REACT_APP_API_ENDPOINT)
-    dispatch({ type: 'AUTHENTICATING_USER' })
-    // fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/login`)
+  return (dispatch) => {
+    dispatch({ type: AUTHENTICATING_USER })
     // adapter.loginUser(username, password)
-    fetch(`http://localhost:3000/api/v1/login`, { //TODO: move this to an adapter
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -24,21 +24,19 @@ export const loginUser = (name, password) => {
           throw response
         }
       })
-      // {user: { username: 'chandler bing', bio: ''}, jwt: 'aaaaaaaaaaaaaaa.bbbbbbbbbbbbbbbbbbbbb.ccccccccccccccccccc'}
       .then(JSONResponse => {
         localStorage.setItem('jwt', JSONResponse.jwt)
-        dispatch({ type: 'SET_CURRENT_USER', payload: JSONResponse.user })
+        dispatch({ type: SET_CURRENT_USER, payload: JSONResponse.user })
       })
-      .catch(r => r.json().then(e => dispatch({ type: 'FAILED_LOGIN', payload: e.message })))
+      .catch(r => r.json().then(e => dispatch({ type: FAILED_LOGIN, payload: e.message })))
 
   }
 }
 
 export const fetchCurrentUser = () => {
-  // takes the token in localStorage and finds out who it belongs to
   return (dispatch) => {
-    dispatch(authenticatingUser()) //tells the app we are fetching
-    fetch(`http://localhost:3000/api/v1/profile`, {
+    dispatch(authenticatingUser())
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/profile`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('jwt')}`
@@ -50,24 +48,24 @@ export const fetchCurrentUser = () => {
 }
 
 export const setCurrentUser = (userData) => ({
-  type: 'SET_CURRENT_USER',
+  type: SET_CURRENT_USER,
   payload: userData
 })
 
 export const failedLogin = (errorMsg) => ({
-  type: 'FAILED_LOGIN',
+  type: FAILED_LOGIN,
   payload: errorMsg
 })
 
-export const authenticatingUser = () => ({ type: 'AUTHENTICATING_USER' })
+export const authenticatingUser = () => ({ type: AUTHENTICATING_USER })
 
-export const logOut = () => ({type: 'LOG_OUT'})
+export const logOut = () => ({type: LOG_OUT })
 
 export const signupUser = (name, password) => {
   return (dispatch) => {
-    dispatch({ type: 'AUTHENTICATING_USER' })
+    dispatch({ type: AUTHENTICATING_USER })
 
-    fetch(`http://localhost:3000/api/v1/users`, {
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -89,9 +87,9 @@ export const signupUser = (name, password) => {
       })
       .then(JSONResponse => {
         localStorage.setItem('jwt', JSONResponse.jwt)
-        dispatch({ type: 'SET_CURRENT_USER', payload: JSONResponse.user })
+        dispatch({ type: SET_CURRENT_USER, payload: JSONResponse.user })
       })
-      .catch(r => r.json().then(e => dispatch({ type: 'FAILED_LOGIN', payload: e.message })))
+      .catch(r => r.json().then(e => dispatch({ type: FAILED_LOGIN, payload: e.message })))
 
   }
 }

@@ -1,4 +1,4 @@
-import { SELECT_LISTING, ADD_LISTING } from './types'
+import { SELECT_LISTING, ADD_LISTING } from '../types'
 import UUID from 'uuid'
 
 export function selectListing(listing) {

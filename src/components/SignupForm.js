@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter, Redirect } from 'react-router'
+import { Redirect } from 'react-router'
 import { signupUser } from '../actions/user'
 import { Button, Form, Segment, Message } from 'semantic-ui-react'
 
@@ -18,7 +18,6 @@ class SignupForm extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return this.props.loggedIn ? (
       <Redirect to="/profile" />
     ) : (

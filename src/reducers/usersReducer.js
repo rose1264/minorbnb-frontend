@@ -1,3 +1,5 @@
+import { AUTHENTICATING_USER, SET_CURRENT_USER, FAILED_LOGIN, LOG_OUT, AUTHENTICATED_USER } from '../types'
+
 const defaultState = {
   user: null,
   loggedIn: false,
@@ -9,21 +11,21 @@ const defaultState = {
 const usersReducer = (state = defaultState, action) => {
   switch (action.type) {
     // TODO: move to types
-    case 'SET_CURRENT_USER':
+    case SET_CURRENT_USER:
       //action.payload {username: 'Chandler Bing', bio: 'my user bio', avatar: 'some image url'}
       return { ...state, user: action.payload, loggedIn: true, authenticatingUser: false }
-    case 'AUTHENTICATING_USER': //tells the app we're fetching
+    case AUTHENTICATING_USER: //tells the app we're fetching
       return { ...state, authenticatingUser: true }
-    case 'AUTHENTICATED_USER':
+    case AUTHENTICATED_USER:
       return { ...state, authenticatingUser: false }
-    case 'FAILED_LOGIN': //for error handling
+    case FAILED_LOGIN: //for error handling
       return {
         ...state,
         failedLogin: true,
         error: action.payload,
         authenticatingUser: false
       }
-    case 'LOG_OUT':
+    case LOG_OUT:
       return defaultState
     default:
       return state

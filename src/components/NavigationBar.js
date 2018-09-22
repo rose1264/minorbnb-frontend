@@ -2,11 +2,9 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { NavLink, withRouter } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
-import { Redirect } from 'react-router'
 import { logOut } from '../actions/user.js'
 
 const logout = (func) => {
-  console.log('logoutfunction func', func);
   localStorage.removeItem('jwt')
   func()
 }
