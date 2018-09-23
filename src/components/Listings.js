@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import withAuth from '../hocs/withAuth'
 import Listing from './Listing'
 
 const Listings = ({ listings }) => {
@@ -17,4 +17,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps)(Listings)
+export default withAuth(connect(mapStateToProps)(Listings))

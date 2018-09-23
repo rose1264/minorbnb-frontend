@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import withAuth from '../hocs/withAuth'
 
 const ListingDetail = props => {
   const {name, price, address, description} = props.listing
@@ -21,4 +22,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(ListingDetail)
+export default withAuth(connect(mapStateToProps)(ListingDetail))

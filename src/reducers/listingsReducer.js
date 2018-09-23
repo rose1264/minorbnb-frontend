@@ -91,9 +91,9 @@ const initialState = {
 
 export default function reducer(state = initialState, action){
   switch(action.type){
-    case 'SELECT_LISTING':
+    case SELECT_LISTING:
       return { ...state, currentListing: action.payload}
-    case 'ADD_LISTING':
+    case ADD_LISTING:
       return { ...state, listings: [...state.listings, action.payload] }
     default:
       return state;

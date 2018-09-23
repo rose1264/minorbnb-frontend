@@ -12,7 +12,7 @@ class LoginForm extends React.Component {
     this.setState({ [semanticInputData.name]: semanticInputData.value })
   }
 
-  handleLoginSubmit = () => { //semantic forms preventDefault for you
+  handleLoginSubmit = () => {
     this.props.loginUser(this.state.name, this.state.password)
     this.setState({ name: '', password: '' })
   }

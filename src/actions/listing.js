@@ -8,7 +8,7 @@ export function selectListing(listing) {
   }
 }
 
-export function addListing(name, price, address, description) {
+export function addListing(name, price, address, description, host_id, neighbourhood_id) {
   return {
     type: ADD_LISTING,
     payload: {
@@ -17,8 +17,8 @@ export function addListing(name, price, address, description) {
       price,
       address,
       description,
-      host_id: 1,
-      neighbourhood_id: 1
+      host_id,
+      neighbourhood_id
     }
   }
 }
