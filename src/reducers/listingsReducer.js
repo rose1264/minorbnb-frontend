@@ -1,29 +1,10 @@
-import { SELECT_LISTING, ADD_LISTING } from '../types'
+import { SELECT_LISTING, ADD_LISTING, FETCH_LISTINGS } from '../types'
 
 //testing data
 const initialState = {
   guest_id: 1,
   host_id: 1,
-  listings: [
-    {
-      id: 1,
-      name: "wonderland",
-      price: "100",
-      address: "200 Rector Place",
-      description: "Wonderful",
-      host_id: 1,
-      neighbourhood_id: 1,
-    },
-    {
-      id: 2,
-      name: "happyland",
-      price: "200",
-      address: "240 Rector Place",
-      description: "convenient",
-      host_id: 2,
-      neighbourhood_id: 1,
-    },
-  ],
+  listings: [],
   reservations:[
     {
       check_in: "2018-11-23",
@@ -89,8 +70,10 @@ const initialState = {
   ],
 }
 
-export default function reducer(state = initialState, action){
+function listingsReducer(state = initialState, action){
   switch(action.type){
+    case FETCH_LISTINGS:
+      return { ...state, listings: action.payload}
     case SELECT_LISTING:
       return { ...state, currentListing: action.payload}
     case ADD_LISTING:
@@ -99,3 +82,5 @@ export default function reducer(state = initialState, action){
       return state;
   }
 }
+
+export default listingsReducer

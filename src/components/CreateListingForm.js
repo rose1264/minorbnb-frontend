@@ -21,10 +21,16 @@ class CreateListingForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.addListing(this.state.name, this.state.price, this.state.address, this.state.description, this.state.host_id, this.state.neighbourhood_id);
+    this.setState({ name: "",
+    price: 0,
+    address: "",
+    description: "",
+    host_id: this.props.host_id,
+    neighbourhood_id: 1,
+    neighbourhoods: this.props.neighbourhoods })
   }
 
   render() {
-console.log(this.state);
     return (
       <form onSubmit={this.handleSubmit}>
         <label>Name: <input type="text" name="name" value={this.state.name} onChange={this.handleChange}/></label>
