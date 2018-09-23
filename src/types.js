@@ -1,8 +1,14 @@
-export const SELECT_LISTING = 'SELECT_LISTING'
-export const ADD_LISTING = 'ADD_LISTING'
-export const FETCH_LISTINGS = 'FETCH_LISTINGS'
+//user
 export const AUTHENTICATING_USER = 'AUTHENTICATING_USER'
 export const AUTHENTICATED_USER = 'AUTHENTICATED_USER'
 export const SET_CURRENT_USER = 'SET_CURRENT_USER'
 export const FAILED_LOGIN = 'FAILED_LOGIN'
 export const LOG_OUT = 'LOG_OUT'
+
+//listing
+export const SELECT_LISTING = 'SELECT_LISTING'
+export const ADD_LISTING = 'ADD_LISTING'
+export const FETCH_LISTINGS = 'FETCH_LISTINGS'
+
+//reservation
+export const ADD_RESERVATION = 'ADD_RESERVATION'

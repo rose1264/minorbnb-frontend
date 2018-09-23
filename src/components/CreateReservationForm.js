@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import withAuth from '../hocs/withAuth'
-import { addListing } from '../actions/listing';
+import { addReservation } from '../actions/reservation';
 
 class CreateReservationForm extends Component {
+  debugger
   state = {
     check_in: "",
     check_out: "",
@@ -16,7 +17,7 @@ class CreateReservationForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.addListing(this.state.name, this.state.price, this.state.address, this.state.description, this.state.host_id, this.state.neighbourhood_id);
+    this.props.addReservation(this.state.check_in, this.state.check_out, this.state.guest_number, this.props.guest_id, this.props.listing_id);
     this.setState({
       check_in: "",
       check_out: "",
@@ -25,6 +26,7 @@ class CreateReservationForm extends Component {
   }
 
   render() {
+    console.log(this.props.guest_id, this.props.listing_id);
     return (
       <form onSubmit={this.handleSubmit}>
         <label>Check In: <input type="date" name="check_in" value={this.state.check_in} onChange={this.handleChange}/></label>
@@ -39,7 +41,8 @@ class CreateReservationForm extends Component {
 function mapStateToProps(state) {
   return {
     guest_id: state.usersReducer.user.id,
+    listing_id: state.listingsReducer.currentListing.id,
   }
 }
 
-export default withAuth(connect(mapStateToProps, { addListing })(CreateReservationForm))
+export default withAuth(connect(mapStateToProps, { addReservation })(CreateReservationForm))
