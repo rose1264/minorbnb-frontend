@@ -26,7 +26,6 @@ class CreateReservationForm extends Component {
   }
 
   render() {
-    console.log(this.props.guest_id, this.props.listing_id);
     return (
       <form onSubmit={this.handleSubmit}>
         <label>Check In: <input type="date" name="check_in" value={this.state.check_in} onChange={this.handleChange}/></label>

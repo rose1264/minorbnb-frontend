@@ -12,3 +12,7 @@ export const FETCH_LISTINGS = 'FETCH_LISTINGS'
 
 //reservation
 export const ADD_RESERVATION = 'ADD_RESERVATION'
+export const FETCH_RESERVATIONS = 'FETCH_RESERVATIONS'
+
+//trips
+export const FETCH_TRIPS = 'FETCH_TRIPS'

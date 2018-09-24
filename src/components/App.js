@@ -9,6 +9,8 @@ import LoginForm from './LoginForm'
 import SignupForm from './SignupForm'
 import Profile from './Profile'
 import NavigationBar from './NavigationBar'
+import MyTrips from './MyTrips'
+import MyReservations from './MyReservations'
 
 const App = props => {
   const loggedIn = props.user.loggedIn
@@ -26,6 +28,8 @@ const App = props => {
           <CreateListingForm />
           <Listings />
           <ListingDetail />
+          <MyTrips />
+          <MyReservations />
         </Fragment>
       ) : null}
 

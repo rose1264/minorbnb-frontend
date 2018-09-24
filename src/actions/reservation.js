@@ -1,4 +1,4 @@
-import { ADD_RESERVATION } from '../types'
+import { ADD_RESERVATION, FETCH_RESERVATIONS } from '../types'
 
 export const addReservation = (check_in, check_out, guest_number, guest_id, listing_id) => {
   return (dispatch) => {
@@ -26,5 +26,12 @@ export const addReservation = (check_in, check_out, guest_number, guest_id, list
       })
       .catch(r => r.json().then(console.log))
 
+  }
+}
+
+export const fetchReservations = reservations => {
+  return {
+    type: FETCH_RESERVATIONS,
+    payload: reservations
   }
 }
