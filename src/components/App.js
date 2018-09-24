@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux'
 import '../assets/css/App.css';
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
+import { fetchCurrentUser } from '../actions/user';
 import Listings from './Listings'
 import ListingDetail from './ListingDetail'
 import CreateListingForm from './CreateListingForm'
@@ -11,14 +12,15 @@ import Profile from './Profile'
 import NavigationBar from './NavigationBar'
 import MyTrips from './MyTrips'
 import MyReservations from './MyReservations'
-import withAuth from '../hocs/withAuth'
 
+class App extends Component {
+  componentDidMount() {
+    if (this.props.user.user === null) this.props.fetchCurrentUser()
+  }
 
-const App = props => {
-  const loggedIn = props.user.loggedIn
-  console.log("inside app, loggedIn is", loggedIn);
-  debugger
-  return (
+  render() {
+    const loggedIn = this.props.user.loggedIn
+    return (
       <Router>
         <Fragment>
           <NavigationBar />
@@ -38,10 +40,16 @@ const App = props => {
           ) : null}
         </Fragment>
       </Router>
-  )
-
+    )
+  }
 }
 
 const mapStateToProps = ({ usersReducer: user }) => ({ user })
 
-export default withRouter(connect(mapStateToProps)(App))
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchCurrentUser: () => dispatch(fetchCurrentUser())
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

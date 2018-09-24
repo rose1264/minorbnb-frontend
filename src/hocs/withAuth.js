@@ -7,7 +7,6 @@ import { Loader } from 'semantic-ui-react'
 const withAuth = (WrappedComponent) => {
   class AuthorizedComponent extends React.Component {
     componentDidMount() {
-      debugger
       if (localStorage.getItem('jwt') && !this.props.loggedIn) this.props.fetchCurrentUser()
     }
 

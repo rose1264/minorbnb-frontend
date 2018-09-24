@@ -7,7 +7,12 @@ import withAuth from '../hocs/withAuth'
 
 class MyTrips extends Component {
   componentDidMount(){
-    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${this.props.user_id}`)
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${this.props.user_id}`, {
+      headers: {
+        method: 'GET',
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`
+      }
+    })
       .then(r=>r.json())
       .then(JSONResponse=>this.props.fetchTrips(JSONResponse.trips))
   }

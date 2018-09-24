@@ -6,7 +6,12 @@ import { fetchListings } from '../actions/listing'
 
 class Listings extends Component {
   componentDidMount(){
-    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/listings`)
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/listings`, {
+      headers: {
+        method: 'GET',
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`
+      }
+    })
       .then(r=>r.json())
       .then(json => this.props.fetchListings(json))
   }
@@ -15,7 +20,7 @@ class Listings extends Component {
     return(
       <ul>
         {this.props.listings.map(listing => <Listing key={listing.id} listing={listing} />)}
-      </ul>      
+      </ul>
     )
   }
 }

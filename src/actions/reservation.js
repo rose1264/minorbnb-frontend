@@ -7,7 +7,8 @@ export const addReservation = (check_in, check_out, guest_number, guest_id, list
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json'
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`
       },
       body: JSON.stringify({
         reservation: {check_in, check_out, guest_number, guest_id, listing_id}
