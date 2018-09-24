@@ -25,6 +25,7 @@ export const loginUser = (name, password) => {
         }
       })
       .then(JSONResponse => {
+        debugger
         localStorage.setItem('jwt', JSONResponse.jwt)
         dispatch({ type: SET_CURRENT_USER, payload: JSONResponse.user })
       })

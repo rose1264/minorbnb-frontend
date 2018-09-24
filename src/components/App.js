@@ -16,7 +16,8 @@ import withAuth from '../hocs/withAuth'
 
 const App = props => {
   const loggedIn = props.user.loggedIn
-
+  console.log("inside app, loggedIn is", loggedIn);
+  debugger
   return (
       <Router>
         <Fragment>
