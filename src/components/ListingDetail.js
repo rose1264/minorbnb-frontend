@@ -5,6 +5,7 @@ import ListingInfo from './ListingInfo'
 // TODO:import ListnigMap from './ListingMap'
 import CreateReservationForm from './CreateReservationForm'
 
+
 const ListingDetail = props => {
   return(
     <div>

@@ -37,15 +37,7 @@ const initialState = {
       listing_id: 2,
     },
   ],
-  currentListing: {
-    id: 1,
-    name: "wonderland",
-    price: "100",
-    address: "200 Rector Place",
-    description: "Wonderful",
-    host_id: 1,
-    neighbourhood_id: 1,
-  },
+  currentListing: {  },
   currentTeservation: {
     check_in: "2018-11-23",
     check_out: "2018-11-25",

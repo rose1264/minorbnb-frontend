@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Trip from './Trip'
 import { fetchTrips } from '../actions/trips'
+import withAuth from '../hocs/withAuth'
+
 
 class MyTrips extends Component {
   componentDidMount(){
@@ -27,4 +29,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {fetchTrips})(MyTrips)
+export default withAuth(connect(mapStateToProps, {fetchTrips})(MyTrips))

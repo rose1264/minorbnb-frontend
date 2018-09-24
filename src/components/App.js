@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux'
 import '../assets/css/App.css';
-import { Route, Switch, withRouter } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 import Listings from './Listings'
 import ListingDetail from './ListingDetail'
 import CreateListingForm from './CreateListingForm'
@@ -11,31 +11,34 @@ import Profile from './Profile'
 import NavigationBar from './NavigationBar'
 import MyTrips from './MyTrips'
 import MyReservations from './MyReservations'
+import withAuth from '../hocs/withAuth'
+
 
 const App = props => {
   const loggedIn = props.user.loggedIn
 
   return (
-    <Fragment>
-      <NavigationBar />
-      <Switch>
-        <Route exact path="/login" component={LoginForm} />
-        <Route exact path="/signup" component={SignupForm} />
-        <Route exact path="/profile" component={Profile} />
-      </Switch>
-      { loggedIn ? (
+      <Router>
         <Fragment>
-          <CreateListingForm />
-          <Listings />
-          <ListingDetail />
-          <MyTrips />
-          <MyReservations />
+          <NavigationBar />
+          <Switch>
+            <Route exact path="/login" component={LoginForm} />
+            <Route exact path="/signup" component={SignupForm} />
+            <Route exact path="/profile" component={Profile} />
+          </Switch>
+          { loggedIn ? (
+            <Fragment>
+              <Route exact path="/listings" component={Listings} />
+              <Route exact path="/listings/detail" component={ListingDetail} />
+              <Route exact path="/listings/new" component={CreateListingForm} />
+              <Route exact path="/reservations/" component={MyReservations}/>
+              <Route exact path="/trips/" component={MyTrips} />
+            </Fragment>
+          ) : null}
         </Fragment>
-      ) : null}
-
-
-    </Fragment>
+      </Router>
   )
+
 }
 
 const mapStateToProps = ({ usersReducer: user }) => ({ user })

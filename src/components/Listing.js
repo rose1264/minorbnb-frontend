@@ -1,16 +1,36 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
+import { Redirect } from 'react-router-dom'
 import { selectListing } from '../actions/listing'
 
-const Listing = props => {
-  const {name, price, address, description} = props.listing
+class Listing extends Component {
 
-  return (
-    <li onClick = {()=> props.selectListing(props.listing)}>
-      {name},{price},{address},{description}
-    </li>
-  )
+  state = {
+    redirect: false
+  }
+
+  setRedirect = () => {
+    this.props.selectListing(this.props.listing)
+    this.setState({
+      redirect: true
+    })
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/listings/detail' />
+    }
+  }
+
+  render(){
+    return (
+      <li>
+        {this.props.listing.name},{this.props.listing.price},{this.props.listing.address},{this.props.listing.description}
+        {this.renderRedirect()}
+        <button onClick={this.setRedirect}>Check Detail</button>
+      </li>
+    )
+  }
 }
 
 

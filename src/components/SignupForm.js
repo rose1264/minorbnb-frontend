@@ -19,7 +19,7 @@ class SignupForm extends React.Component {
 
   render() {
     return this.props.loggedIn ? (
-      <Redirect to="/profile" />
+      <Redirect to="/listings" />
     ) : (
       <Segment>
         <Form

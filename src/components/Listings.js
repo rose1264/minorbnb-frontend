@@ -12,19 +12,21 @@ class Listings extends Component {
   }
 
   render(){
-    return (
+    return(
       <ul>
         {this.props.listings.map(listing => <Listing key={listing.id} listing={listing} />)}
-      </ul>
+      </ul>      
     )
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   return {
-    listings: state.listingsReducer.listings
+    listings: state.listingsReducer.listings,
+    currentListing: state.listingsReducer.currentListing,
   }
 }
+
 
 
 export default withAuth(connect(mapStateToProps, { fetchListings })(Listings))

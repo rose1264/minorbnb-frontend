@@ -4,6 +4,7 @@ import { Redirect } from 'react-router'
 import { loginUser } from '../actions/user'
 import { Button, Form, Segment, Message } from 'semantic-ui-react'
 
+
 class LoginForm extends React.Component {
   state = { name: '', password: '' }
 
@@ -19,7 +20,7 @@ class LoginForm extends React.Component {
 
   render() {
     return this.props.loggedIn ? (
-      <Redirect to="/profile" />
+      <Redirect to="/listings" />
     ) : (
       <Segment>
         <Form
