@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import withAuth from '../hocs/withAuth'
-import { addReview } from '../actions/review';
+import { addReview } from '../actions/review'
+import { Redirect } from 'react-router'
 
 class CreateReviewForm extends Component {
   state = {
     rating: 5,
     description: "",
     guest_id: this.props.guest_id,
-    reservation_id: this.props.reservation_id
+    reservation_id: this.props.reservation_id,
+    fireRedirect: false,
   }
 
   handleChange = (event) => {
@@ -22,17 +24,25 @@ class CreateReviewForm extends Component {
       rating: 5,
       description: "",
       guest_id: this.props.guest_id,
-      reservation_id: this.props.reservation_id
+      reservation_id: this.props.reservation_id,
+      fireRedirect: true,
     })
   }
 
   render() {
+    const { fireRedirect } = this.state
+
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>Rating: <input type="number" name="rating" value={this.state.rating} onChange={this.handleChange}/></label>
-        <label>Description: <input type="text" name="description" value={this.state.description} onChange={this.handleChange}/></label>
-        <input type="submit" value="Add Review" />
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label>Rating: <input type="number" name="rating" value={this.state.rating} onChange={this.handleChange}/></label>
+          <label>Description: <input type="text" name="description" value={this.state.description} onChange={this.handleChange}/></label>
+          <input type="submit" value="Add Review" />
+        </form>
+        {fireRedirect && (
+          <Redirect to={'/trips'} />
+        )}
+      </div>
     )
   }
 }

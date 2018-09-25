@@ -19,7 +19,7 @@ class MyReservations extends Component {
     return (
       <div>
         <h3>My Reservations</h3>
-        {this.props.reservations.map(reservation => <Reservation key={reservation.check_in} reservation={reservation} />)}
+        {this.props.reservations.map(reservation => <Reservation key={reservation.id} reservation={reservation} />)}
       </div>
     )
   }

@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import withAuth from '../hocs/withAuth'
-import { addReservation } from '../actions/reservation';
+import { addReservation } from '../actions/reservation'
+import { Redirect } from 'react-router'
 
 class CreateReservationForm extends Component {
-  debugger
   state = {
     check_in: "",
     check_out: "",
     guest_number: 1,
+    fireRedirect: false,
   }
 
   handleChange = (event) => {
@@ -22,17 +23,25 @@ class CreateReservationForm extends Component {
       check_in: "",
       check_out: "",
       guest_number: 1,
+      fireRedirect: true,
     })
   }
 
   render() {
+    const { fireRedirect } = this.state
+
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>Check In: <input type="date" name="check_in" value={this.state.check_in} onChange={this.handleChange}/></label>
-        <label>Check Out: <input type="date" name="check_out" value={this.state.check_out} onChange={this.handleChange}/></label>
-        <label>Guest Number: <input type="number" name="guest_number" value={this.state.guest_number} onChange={this.handleChange}/></label>
-        <input type="submit" value="Add Reservation" />
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label>Check In: <input type="date" name="check_in" value={this.state.check_in} onChange={this.handleChange}/></label>
+          <label>Check Out: <input type="date" name="check_out" value={this.state.check_out} onChange={this.handleChange}/></label>
+          <label>Guest Number: <input type="number" name="guest_number" value={this.state.guest_number} onChange={this.handleChange}/></label>
+          <input type="submit" value="Add Reservation" />
+        </form>
+        {fireRedirect && (
+          <Redirect to={'/reservations'} />
+        )}
+      </div>
     )
   }
 }
