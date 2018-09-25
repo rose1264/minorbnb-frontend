@@ -11,7 +11,9 @@ import SignupForm from './SignupForm'
 import Profile from './Profile'
 import NavigationBar from './NavigationBar'
 import MyTrips from './MyTrips'
+import MyReviews from './MyReviews'
 import MyReservations from './MyReservations'
+import CreateReviewForm from './CreateReviewForm'
 
 class App extends Component {
   componentDidMount() {
@@ -36,6 +38,8 @@ class App extends Component {
               <Route exact path="/listings/new" component={CreateListingForm} />
               <Route exact path="/reservations/" component={MyReservations}/>
               <Route exact path="/trips/" component={MyTrips} />
+              <Route exact path="/reviews" component={MyReviews} />
+              <Route exact path="/reviews/new" component={CreateReviewForm} />
             </Fragment>
           ) : null}
         </Fragment>

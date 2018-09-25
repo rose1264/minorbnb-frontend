@@ -16,3 +16,8 @@ export const FETCH_RESERVATIONS = 'FETCH_RESERVATIONS'
 
 //trips
 export const FETCH_TRIPS = 'FETCH_TRIPS'
+export const SET_TRIP = 'SET_TRIP'
+
+//reviews
+export const ADD_REVIEW = 'ADD_REVIEW'
+export const FETCH_REVIEWS = 'FETCH_REVIEWS'

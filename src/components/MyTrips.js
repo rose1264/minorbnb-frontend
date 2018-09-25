@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Trip from './Trip'
-import { fetchTrips } from '../actions/trips'
+import { fetchTrips } from '../actions/trip'
 import withAuth from '../hocs/withAuth'
 
 
@@ -15,13 +15,14 @@ class MyTrips extends Component {
     })
       .then(r=>r.json())
       .then(JSONResponse=>this.props.fetchTrips(JSONResponse.trips))
+
   }
 
   render(){
     return (
       <div>
         <h3>My Trips</h3>
-        {this.props.trips.map(trip => <Trip key={trip.id} trip={trip}/>)}
+        {this.props.trips.map(trip => <Trip key={trip.id} trip={trip} />)}
       </div>
     )
   }
@@ -30,7 +31,7 @@ class MyTrips extends Component {
 function mapStateToProps(state) {
   return{
     user_id: state.usersReducer.user.id,
-    trips: state.tripsReducer.trips
+    trips: state.tripsReducer.trips,
   }
 }
 

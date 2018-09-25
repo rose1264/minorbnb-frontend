@@ -1,9 +1,9 @@
-import { ADD_RESERVATION, FETCH_RESERVATIONS } from '../types'
+import { ADD_REVIEW, FETCH_REVIEWS } from '../types'
 
-export const addReservation = (check_in, check_out, guest_number, guest_id, listing_id) => {
+export const addReview = (rating, description, guest_id, reservation_id) => {
   return (dispatch) => {
 
-    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/reservations`, {
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/reviews`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -11,7 +11,7 @@ export const addReservation = (check_in, check_out, guest_number, guest_id, list
         Authorization: `Bearer ${localStorage.getItem('jwt')}`
       },
       body: JSON.stringify({
-        reservation: {check_in, check_out, guest_number, guest_id, listing_id}
+        review: {rating, description, guest_id, reservation_id}
       })
     })
       .then(response => {
@@ -22,16 +22,17 @@ export const addReservation = (check_in, check_out, guest_number, guest_id, list
         }
       })
       .then(JSONResponse => {
-        dispatch({ type: ADD_RESERVATION, payload: JSONResponse })
+        dispatch({ type: ADD_REVIEW, payload: JSONResponse })
       })
       .catch(r => r.json().then(console.log))
 
   }
 }
 
-export const fetchReservations = reservations => {
+
+export const fetchReviews = reviews => {
   return {
-    type: FETCH_RESERVATIONS,
-    payload: reservations
+    type: FETCH_REVIEWS,
+    payload: reviews
   }
 }

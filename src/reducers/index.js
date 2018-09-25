@@ -4,6 +4,7 @@ import listingsReducer from './listingsReducer';
 import neighbourhoodsReducer from './neighbourhoodsReducer';
 import tripsReducer from './tripsReducer';
 import reservationsReducer from './reservationsReducer';
+import reviewsReducer from './reviewsReducer';
 
 export default combineReducers({
   usersReducer: usersReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   neighbourhoodsReducer: neighbourhoodsReducer,
   tripsReducer: tripsReducer,
   reservationsReducer: reservationsReducer,
+  reviewsReducer: reviewsReducer
 })
