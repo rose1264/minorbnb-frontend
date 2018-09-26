@@ -31,7 +31,7 @@ class LoginForm extends React.Component {
           error={this.props.failedLogin}
         >
           <Message error header={this.props.failedLogin ? this.props.error : null} />
-          <Form.Group widths="equal">
+          <Form.Field>
             <Form.Input
               label="name"
               placeholder="name"
@@ -47,7 +47,7 @@ class LoginForm extends React.Component {
               onChange={this.handleChange}
               value={this.state.password}
             />
-          </Form.Group>
+          </Form.Field>
           <Button type="submit">Login</Button>
         </Form>
       </Segment>

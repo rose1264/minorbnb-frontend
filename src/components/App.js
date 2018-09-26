@@ -17,7 +17,9 @@ import CreateReviewForm from './CreateReviewForm'
 
 class App extends Component {
   componentDidMount() {
-    if (this.props.user.user === null) this.props.fetchCurrentUser()
+    if (this.props.location.pathname !== '/login' && this.props.location.pathname !== '/signup'){
+      if (this.props.user.user === null) this.props.fetchCurrentUser()
+    }
   }
 
   render() {

@@ -5,16 +5,23 @@ import { signupUser } from '../actions/user'
 import { Button, Form, Segment, Message } from 'semantic-ui-react'
 
 class SignupForm extends React.Component {
-  state = { name: '', password: '' }
+  state = { name: '', password: '', avatar:null }
 
-
-  handleChange = (e, semanticInputData) => {
-    this.setState({ [semanticInputData.name]: semanticInputData.value })
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+     })
   }
 
+  handleFileUpload = e => {
+    this.setState({
+      avatar: e.target.files[0],
+    });
+  };
+
   handleLoginSubmit = () => {
-    this.props.signupUser(this.state.name, this.state.password)
-    this.setState({ name: '', password: '' })
+    this.props.signupUser(this.state.name, this.state.password, this.state.avatar)
+    this.setState({ name: '', password: '', avatar:null })
   }
 
   render() {
@@ -30,7 +37,7 @@ class SignupForm extends React.Component {
           error={this.props.failedLogin}
         >
           <Message error header={this.props.failedLogin ? this.props.error : null} />
-          <Form.Group widths="equal">
+          <Form.Field>
             <Form.Input
               label="name"
               placeholder="name"
@@ -46,7 +53,12 @@ class SignupForm extends React.Component {
               onChange={this.handleChange}
               value={this.state.password}
             />
-          </Form.Group>
+            <Form.Input
+              type="file"
+              name="avatar"
+              onChange={this.handleFileUpload}
+            />
+          </Form.Field>
           <Button type="submit">Sign Up</Button>
         </Form>
       </Segment>

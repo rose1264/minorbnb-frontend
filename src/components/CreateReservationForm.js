@@ -39,7 +39,7 @@ class CreateReservationForm extends Component {
           <input type="submit" value="Add Reservation" />
         </form>
         {fireRedirect && (
-          <Redirect to={'/reservations'} />
+          <Redirect to={'/trips'} />
         )}
       </div>
     )
