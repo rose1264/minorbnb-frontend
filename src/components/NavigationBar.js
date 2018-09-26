@@ -18,7 +18,6 @@ const NavigationBar = (props) => {
   const pathname = props.location.pathname
   const logOut = props.logOut
 
-  console.log(props.user.user);
   return (
     <Menu pointing secondary>
       {loggedIn ? (
@@ -33,7 +32,7 @@ const NavigationBar = (props) => {
             <Menu.Item as={NavLink} to="/reviews/" name="My Reviews" active={pathname === '/reviews/'} />
             <Menu.Item as={NavLink} to="/profile" name="Profile" active={pathname === '/profile'} />
             <Menu.Item as={NavLink} to="/login" name="Logout" onClick={() => {logout(logOut)}} active={pathname === '/login'} />
-            { avatarThumbUrl ? ( <img src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarThumbUrl}`} /> ) : null}
+            { avatarThumbUrl ? ( <img src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarThumbUrl}`} alt="user profile"/> ) : null}
           </Menu.Menu>
         </Fragment>
       ) : (

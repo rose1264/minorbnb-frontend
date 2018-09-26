@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import withAuth from '../hocs/withAuth'
 import { addListing } from '../actions/listing';
 import { Redirect } from 'react-router'
+import { Button, Form, Segment } from 'semantic-ui-react'
+import { fetchNeighbourhoods } from '../actions/neighbourhood'
 
 class CreateListingForm extends Component {
   state = {
@@ -12,8 +14,18 @@ class CreateListingForm extends Component {
     description: "",
     host_id: this.props.host_id,
     neighbourhood_id: 1,
-    neighbourhoods: this.props.neighbourhoods,
     fireRedirect: false,
+  }
+
+  componentDidMount(){
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/neighbourhoods/`,{
+      headers: {
+        method: 'GET',
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`
+      }
+    })
+      .then(r=>r.json())
+      .then(JSONResponse=>this.props.fetchNeighbourhoods(JSONResponse))
   }
 
   handleChange = (event) => {
@@ -30,7 +42,6 @@ class CreateListingForm extends Component {
       description: "",
       host_id: this.props.host_id,
       neighbourhood_id: 1,
-      neighbourhoods: this.props.neighbourhoods,
       fireRedirect: true,
      })
   }
@@ -39,26 +50,56 @@ class CreateListingForm extends Component {
     const { fireRedirect } = this.state
 
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>Name: <input type="text" name="name" value={this.state.name} onChange={this.handleChange}/></label>
-          <label>Price: <input type="number" name="price" value={this.state.price} onChange={this.handleChange}/></label>
-          <label>Address: <input type="text" name="address" value={this.state.address} onChange={this.handleChange}/></label>
-          <label>Description: <input type="text" name="description" value={this.state.description} onChange={this.handleChange}/></label>
-          <label>Neighbourhood:
-            <select
-              name="neighbourhood_id"
-              value={this.state.neighbourhood_id}
-              onChange={this.handleChange}>
-              {this.state.neighbourhoods.map(neighbourhood => <option key={neighbourhood.id} value={neighbourhood.id} >{neighbourhood.name}</option>)}
-            </select>
-          </label>
-          <input type="submit" value="Add Listing" />
-        </form>
+      <Segment>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Field>
+            <Form.Input
+              label="name"
+              placeholder="name"
+              name="name"
+              onChange={this.handleChange}
+              value={this.state.name}
+            />
+            <Form.Input
+              label="price"
+              placeholder="price per night"
+              type="number"
+              name="price"
+              onChange={this.handleChange}
+              value={this.state.price}
+            />
+            <Form.Input
+              label="address"
+              placeholder="address"
+              type="text"
+              name="address"
+              onChange={this.handleChange}
+              value={this.state.address}
+            />
+            <Form.Input
+              label="description"
+              placeholder="description"
+              type="text"
+              name="description"
+              onChange={this.handleChange}
+              value={this.state.description}
+            />
+            <label>Neighbourhood:
+              <select
+                name="neighbourhood_id"
+                value={this.state.neighbourhood_id}
+                onChange={this.handleChange}>
+                {this.props.neighbourhoods.map(neighbourhood => <option key={neighbourhood.id} value={neighbourhood.id} >{neighbourhood.name}</option>)}
+              </select>
+            </label>
+          </Form.Field>
+          <Button type="submit">Add Listing</Button>
+        </Form>
+
         {fireRedirect && (
           <Redirect to={'/listings'} />
         )}
-      </div>
+      </Segment>
     )
   }
 }
@@ -70,4 +111,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default withAuth(connect(mapStateToProps, { addListing })(CreateListingForm))
+export default withAuth(connect(mapStateToProps, { addListing, fetchNeighbourhoods })(CreateListingForm))

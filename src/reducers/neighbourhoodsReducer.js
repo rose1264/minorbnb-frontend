@@ -1,22 +1,13 @@
+import { FETCH_NEIGHBOURHOODS } from '../types'
+
 const initialState = {
-  neighbourhoods: [
-    {
-      id:1,
-      name:"BPC",
-      city_id: 1,
-      listing: []
-    },
-    {
-      id:2,
-      name:"Tribeca",
-      city_id: 1,
-      listing: []
-    }
-  ]
+  neighbourhoods: []
 }
 
 const neighbourhoodsReducer = (state = initialState, action) => {
   switch(action.type) {
+    case FETCH_NEIGHBOURHOODS:
+      return { ...state, neighbourhoods:action.payload}
     default:
       return state
   }
