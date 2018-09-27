@@ -1,65 +1,17 @@
-import { SELECT_LISTING, ADD_LISTING, FETCH_LISTINGS } from '../types'
+import { SELECT_LISTING, ADD_LISTING, FETCH_LISTINGS, ADDING_LISTING, ADDED_LISTING } from '../types'
 
 //testing data
 const initialState = {
   guest_id: 1,
   host_id: 1,
   listings: [],
-  reservations:[
-    {
-      check_in: "2018-11-23",
-      check_out: "2018-11-25",
-      guest_number: 1,
-      guest_id: 1,
-      listing_id: 1,
-    },
-    {
-      check_in: "2018-11-24",
-      check_out: "2018-11-25",
-      guest_number: 1,
-      guest_id: 2,
-      listing_id: 2,
-    },
-  ],
-  trips:[
-    {
-      check_in: "2018-11-23",
-      check_out: "2018-11-25",
-      guest_number: 1,
-      guest_id: 1,
-      listing_id: 1,
-    },
-    {
-      check_in: "2018-11-24",
-      check_out: "2018-11-25",
-      guest_number: 1,
-      guest_id: 2,
-      listing_id: 2,
-    },
-  ],
-  currentListing: {  },
-  currentTeservation: {
-    check_in: "2018-11-23",
-    check_out: "2018-11-25",
-    guest_number: 1,
-    guest_id: 1,
-    listing_id: 1,
-  },
-  currentTrip:{
-    check_in: "2018-11-23",
-    check_out: "2018-11-25",
-    guest_number: 1,
-    guest_id: 1,
-    listing_id: 1,
-  },
-  reviews:[
-    {
-      rating: 4,
-      description: "enjoy it",
-      guest_id: 1,
-      reservation_id: 1
-    },
-  ],
+  reservations:[],
+  trips:[],
+  currentListing: {},
+  currentTeservation: {},
+  currentTrip:{},
+  reviews:[],
+  addingListing:false,
 }
 
 function listingsReducer(state = initialState, action){
@@ -69,7 +21,11 @@ function listingsReducer(state = initialState, action){
     case SELECT_LISTING:
       return { ...state, currentListing: action.payload}
     case ADD_LISTING:
-      return { ...state, listings: [...state.listings, action.payload] }
+      return { ...state, listings: [...state.listings, action.payload]}
+    case ADDING_LISTING:
+      return { ...state, addingListing:true}
+    case ADDED_LISTING:
+        return { ...state, addingListing:false}
     default:
       return state;
   }

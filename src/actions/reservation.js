@@ -1,7 +1,8 @@
-import { ADD_RESERVATION, FETCH_RESERVATIONS } from '../types'
+import { ADD_RESERVATION, FETCH_RESERVATIONS, ADDING_RESERVATION, ADDED_RESERVATION } from '../types'
 
 export const addReservation = (check_in, check_out, guest_number, guest_id, listing_id, file) => {
   return (dispatch) => {
+    dispatch({type: ADDING_RESERVATION})
 
     let data = new FormData()
     data.append('check_in', check_in)
@@ -23,9 +24,8 @@ export const addReservation = (check_in, check_out, guest_number, guest_id, list
           throw response
         }
       })
-      .then(JSONResponse => {
-        dispatch({ type: ADD_RESERVATION, payload: JSONResponse })
-      })
+      .then(JSONResponse => {dispatch({ type: ADD_RESERVATION, payload: JSONResponse })})
+      .then( ()=> dispatch({ type: ADDED_RESERVATION }))
       .catch(r => r.json().then(console.log))
 
   }

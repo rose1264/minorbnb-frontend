@@ -1,4 +1,4 @@
-import { SELECT_LISTING, ADD_LISTING, FETCH_LISTINGS } from '../types'
+import { SELECT_LISTING, ADD_LISTING, FETCH_LISTINGS, ADDING_LISTING, ADDED_LISTING } from '../types'
 
 export const selectListing = listing => {
   return {
@@ -9,6 +9,7 @@ export const selectListing = listing => {
 
 export const addListing = (name, price, address, description, host_id, neighbourhood_id, avatars) => {
   return (dispatch) => {
+    dispatch({type: ADDING_LISTING})
 
     let data = new FormData()
     data.append('name', name)
@@ -33,9 +34,8 @@ export const addListing = (name, price, address, description, host_id, neighbour
           throw response
         }
       })
-      .then(JSONResponse => {
-        dispatch({ type: ADD_LISTING, payload: JSONResponse })
-      })
+      .then(JSONResponse => dispatch({ type: ADD_LISTING, payload: JSONResponse }))
+      .then(()=>dispatch({ type: ADDED_LISTING }))
       .catch(r => r.json().then(console.log))
 
   }

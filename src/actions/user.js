@@ -3,7 +3,7 @@ import { AUTHENTICATING_USER, SET_CURRENT_USER, FAILED_LOGIN, LOG_OUT } from '..
 export const loginUser = (name, password) => {
   return (dispatch) => {
     dispatch({ type: AUTHENTICATING_USER })
-    // adapter.loginUser(username, password)
+
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/login`, {
       method: 'POST',
       headers: {
@@ -61,12 +61,13 @@ export const authenticatingUser = () => ({ type: AUTHENTICATING_USER })
 
 export const logOut = () => ({type: LOG_OUT })
 
-export const signupUser = (name, password, avatar) => {
+export const signupUser = (name, password, avatar, email) => {
   return (dispatch) => {
     dispatch({ type: AUTHENTICATING_USER })
 
     let data = new FormData()
     data.append('name', name)
+    data.append('email', email)
     data.append('password', password)
     data.append('avatar', avatar)
 

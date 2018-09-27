@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import withAuth from '../hocs/withAuth'
 import { addReview } from '../actions/review'
 import { Redirect } from 'react-router'
+import { Button, Form, Segment, Container } from 'semantic-ui-react'
 
 class CreateReviewForm extends Component {
   state = {
@@ -33,16 +34,35 @@ class CreateReviewForm extends Component {
     const { fireRedirect } = this.state
 
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>Rating: <input type="number" name="rating" value={this.state.rating} onChange={this.handleChange}/></label>
-          <label>Description: <input type="text" name="description" value={this.state.description} onChange={this.handleChange}/></label>
-          <input type="submit" value="Add Review" />
-        </form>
-        {fireRedirect && (
-          <Redirect to={'/trips'} />
-        )}
-      </div>
+      <Container>
+        <center><h2>Do you enjoy your stay? Share something nice about your trip!</h2></center>
+        <Segment>
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Field>
+              <Form.Input
+                label="rating"
+                type="number"
+                name="rating"
+                onChange={this.handleChange}
+                value={this.state.rating}
+              />
+              <Form.Input
+                label="description"
+                type="text"
+                name="description"
+                onChange={this.handleChange}
+                value={this.state.description}
+              />
+            </Form.Field>
+            <Button type="submit">Add Review</Button>
+          </Form>
+
+          {fireRedirect && (
+            <Redirect to={'/trips'} />
+          )}
+        </Segment>
+      </Container>
+      
     )
   }
 }

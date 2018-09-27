@@ -29,7 +29,7 @@ class MyReviews extends Component {
 function mapStateToProps(state) {
   return{
     user_id: state.usersReducer.user.id,
-    reviews: state.reviewsReducer.reviews
+    reviews: state.reviewsReducer.reviews,
   }
 }
 

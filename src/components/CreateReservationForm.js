@@ -46,9 +46,7 @@ class CreateReservationForm extends Component {
 
   render() {
     const { fireRedirect } = this.state
-    console.log('host_id', this.props.host_id)
-    console.log('listing_id', this.props.listing_id);
-    console.log('user_id', this.props.guest_id);
+    
     return (
       (this.props.host_id === this.props.guest_id ?
         null

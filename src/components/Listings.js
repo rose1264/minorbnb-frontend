@@ -4,6 +4,8 @@ import withAuth from '../hocs/withAuth'
 import Listing from './Listing'
 import { fetchListings } from '../actions/listing'
 import { Container, Card } from 'semantic-ui-react'
+import { Loader } from 'semantic-ui-react'
+
 
 class Listings extends Component {
   componentDidMount(){
@@ -18,13 +20,18 @@ class Listings extends Component {
   }
 
   render(){
-    return(
-      <Container>
-        <Card.Group>
+    if(this.props.addingListing){
+      return <Loader active inline="centered" />
+    } else {
+      return(
+        <Container>
+          <Card.Group>
             {this.props.listings.map(listing => <Listing key={listing.id} listing={listing} />)}
-        </Card.Group>
-      </Container>
-    )
+          </Card.Group>
+        </Container>
+      )
+
+    }
   }
 }
 
@@ -32,6 +39,7 @@ const mapStateToProps = state => {
   return {
     listings: state.listingsReducer.listings,
     currentListing: state.listingsReducer.currentListing,
+    addingListing: state.listingsReducer.addingListing,
   }
 }
 
