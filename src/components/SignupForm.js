@@ -5,7 +5,11 @@ import { signupUser } from '../actions/user'
 import { Container, Button, Form, Segment, Message } from 'semantic-ui-react'
 
 class SignupForm extends React.Component {
-  state = { name: '', password: '', avatar:null }
+  state = {
+    name: '',
+    password: '',
+    avatar:null,
+  }
 
   handleChange = e => {
     this.setState({
@@ -21,7 +25,11 @@ class SignupForm extends React.Component {
 
   handleLoginSubmit = () => {
     this.props.signupUser(this.state.name, this.state.password, this.state.avatar)
-    this.setState({ name: '', password: '', avatar:null })
+    this.setState({
+      name: '',
+      password: '',
+      avatar:null
+    })
   }
 
   render() {
@@ -55,6 +63,7 @@ class SignupForm extends React.Component {
                 value={this.state.password}
               />
               <Form.Input
+                label="upload your profile picture"
                 type="file"
                 name="avatar"
                 onChange={this.handleFileUpload}

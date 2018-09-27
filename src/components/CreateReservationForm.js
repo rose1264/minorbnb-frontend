@@ -11,11 +11,18 @@ class CreateReservationForm extends Component {
     check_out: "",
     guest_number: 1,
     fireRedirect: false,
+    avatar: null,
   }
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   }
+
+  handleFileUpload = e => {
+    this.setState({
+      avatar: e.target.files[0],
+    });
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -24,7 +31,8 @@ class CreateReservationForm extends Component {
       this.state.check_out,
       this.state.guest_number,
       this.props.guest_id,
-      this.props.listing_id
+      this.props.listing_id,
+      this.state.avatar,
     );
 
     this.setState({
@@ -32,12 +40,13 @@ class CreateReservationForm extends Component {
       check_out: "",
       guest_number: 1,
       fireRedirect: true,
+      avatar: null,
     })
   }
 
   render() {
     const { fireRedirect } = this.state
-
+    
     return (
       <Container>
         <Segment>
@@ -64,6 +73,12 @@ class CreateReservationForm extends Component {
                 name="guest_number"
                 onChange={this.handleChange}
                 value={this.state.guest_number}
+              />
+              <Form.Input
+                label="upload your school holiday release form here"
+                type="file"
+                name="avatar"
+                onChange={this.handleFileUpload}
               />
             </Form.Field>
             <Button type="submit">Add Reservation</Button>

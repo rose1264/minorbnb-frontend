@@ -34,7 +34,6 @@ class CreateListingForm extends Component {
   }
 
   handleFileUpload = e => {
-    console.log(e.target.files);
     this.setState({
       avatars: e.target.files,
     });
