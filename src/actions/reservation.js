@@ -1,6 +1,6 @@
 import { ADD_RESERVATION, FETCH_RESERVATIONS } from '../types'
 
-export const addReservation = (check_in, check_out, guest_number, guest_id, listing_id, avatar) => {
+export const addReservation = (check_in, check_out, guest_number, guest_id, listing_id, file) => {
   return (dispatch) => {
 
     let data = new FormData()
@@ -9,7 +9,7 @@ export const addReservation = (check_in, check_out, guest_number, guest_id, list
     data.append('guest_number', guest_number)
     data.append('guest_id', guest_id)
     data.append('listing_id', listing_id)
-    data.append('avatar', avatar)
+    data.append('file', file)
 
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/reservations`, {
       method: 'POST',

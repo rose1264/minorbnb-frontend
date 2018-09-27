@@ -11,7 +11,7 @@ class CreateReservationForm extends Component {
     check_out: "",
     guest_number: 1,
     fireRedirect: false,
-    avatar: null,
+    file: null,
   }
 
   handleChange = (event) => {
@@ -20,7 +20,7 @@ class CreateReservationForm extends Component {
 
   handleFileUpload = e => {
     this.setState({
-      avatar: e.target.files[0],
+      file: e.target.files[0],
     });
   };
 
@@ -32,7 +32,7 @@ class CreateReservationForm extends Component {
       this.state.guest_number,
       this.props.guest_id,
       this.props.listing_id,
-      this.state.avatar,
+      this.state.file,
     );
 
     this.setState({
@@ -40,15 +40,22 @@ class CreateReservationForm extends Component {
       check_out: "",
       guest_number: 1,
       fireRedirect: true,
-      avatar: null,
+      file: null,
     })
   }
 
   render() {
     const { fireRedirect } = this.state
-    
+    console.log('host_id', this.props.host_id)
+    console.log('listing_id', this.props.listing_id);
+    console.log('user_id', this.props.guest_id);
     return (
+      (this.props.host_id === this.props.guest_id ?
+        null
+      :
       <Container>
+        <br/>
+        <center><h2>Make a reservation today!</h2></center>
         <Segment>
           <Form onSubmit={this.handleSubmit}>
             <Form.Field>
@@ -77,7 +84,7 @@ class CreateReservationForm extends Component {
               <Form.Input
                 label="upload your school holiday release form here"
                 type="file"
-                name="avatar"
+                name="file"
                 onChange={this.handleFileUpload}
               />
             </Form.Field>
@@ -89,6 +96,8 @@ class CreateReservationForm extends Component {
           )}
         </Segment>
       </Container>
+      )
+
     )
   }
 }
@@ -97,6 +106,7 @@ function mapStateToProps(state) {
   return {
     guest_id: state.usersReducer.user.id,
     listing_id: state.listingsReducer.currentListing.id,
+    host_id: state.listingsReducer.currentListing.host.id,
   }
 }
 

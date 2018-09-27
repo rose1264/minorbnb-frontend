@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
-import { NavLink, withRouter } from 'react-router-dom'
+import { NavLink, withRouter, Link } from 'react-router-dom'
 import { Menu, Header, Icon } from 'semantic-ui-react'
 import { logOut } from '../actions/user.js'
 
@@ -22,13 +22,13 @@ const NavigationBar = (props) => {
     <Menu pointing secondary>
       {loggedIn ? (
         <Fragment>
-          <Menu.Item>
+          <Menu.Item as={Link} to="/listings">
             <Header as='h2'>
               <Icon name='building outline' />
               <Header.Content>MinorBnb</Header.Content>
             </Header>
           </Menu.Item>
-          <Menu.Item as={NavLink} to="/listings" name="Listings" active={pathname === '/listings'} />
+          
 
           <Menu.Menu position="right">
             <Menu.Item as={NavLink} to="/listings/new" name="Create a listing" active={pathname === '/listings/new'} />
@@ -44,12 +44,14 @@ const NavigationBar = (props) => {
         </Fragment>
       ) : (
         <Fragment>
+
           <Menu.Item>
             <Header as='h2'>
               <Icon name='building outline' />
               <Header.Content>MinorBnb</Header.Content>
             </Header>
           </Menu.Item>
+
           <Menu.Menu position="right">
             <Menu.Item as={NavLink} to="/signup" name="Signup" active={pathname === '/signup'} >
               <Icon name='user plus' />Sign Up
