@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import withAuth from '../hocs/withAuth'
 import Listing from './Listing'
 import { fetchListings } from '../actions/listing'
+import { Container, Card } from 'semantic-ui-react'
 
 class Listings extends Component {
   componentDidMount(){
@@ -18,9 +19,11 @@ class Listings extends Component {
 
   render(){
     return(
-      <ul>
-        {this.props.listings.map(listing => <Listing key={listing.id} listing={listing} />)}
-      </ul>
+      <Container>
+        <Card.Group>
+            {this.props.listings.map(listing => <Listing key={listing.id} listing={listing} />)}
+        </Card.Group>
+      </Container>
     )
   }
 }

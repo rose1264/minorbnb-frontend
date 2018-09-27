@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Review from './Review'
 import { fetchReviews } from '../actions/review'
+import { Container } from 'semantic-ui-react'
 
 class MyReviews extends Component {
   componentDidMount(){
@@ -17,10 +18,10 @@ class MyReviews extends Component {
 
   render(){
     return (
-      <div>
+      <Container>
         <h3>My Reviews</h3>
         {this.props.reviews.map(review => <Review key={review.description} review={review} />)}
-      </div>
+      </Container>
     )
   }
 }

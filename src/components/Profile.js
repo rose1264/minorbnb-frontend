@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Card, Image } from 'semantic-ui-react'
+import { Image } from 'semantic-ui-react'
 import withAuth from '../hocs/withAuth'
 
 const Profile = props => {
@@ -10,12 +10,10 @@ const Profile = props => {
   }
 
   return(
-    <Card>
+    <center>
       <Image src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarDemoUrl}`} />
-      <Card.Content>
-        <Card.Header>{props.user.user.name}</Card.Header>
-      </Card.Content>
-    </Card>
+      <h3>{props.user.user.name}</h3>
+    </center>
   )
 }
 

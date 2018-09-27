@@ -65,25 +65,14 @@ export const signupUser = (name, password, avatar) => {
   return (dispatch) => {
     dispatch({ type: AUTHENTICATING_USER })
 
-    let data = new FormData();
+    let data = new FormData()
     data.append('name', name)
     data.append('password', password)
     data.append('avatar', avatar)
 
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users`, {
       method: 'POST',
-      // headers: {
-      //   'Content-Type': 'application/json',
-      //   Accept: 'application/json',
-      // },
       body: data,
-      // body: JSON.stringify({
-      //   user: {
-      //     name: name,
-      //     password: password,
-      //     avatar: avatar,
-      //   }
-      // })
     })
       .then(response => {
         if (response.ok) {

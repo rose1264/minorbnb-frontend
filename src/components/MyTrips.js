@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Trip from './Trip'
 import { fetchTrips } from '../actions/trip'
 import withAuth from '../hocs/withAuth'
+import { Container } from 'semantic-ui-react'
 
 
 class MyTrips extends Component {
@@ -20,10 +21,10 @@ class MyTrips extends Component {
 
   render(){
     return (
-      <div>
+      <Container>
         <h3>My Trips</h3>
         {this.props.trips.map(trip => <Trip key={trip.id} trip={trip} />)}
-      </div>
+      </Container>
     )
   }
 }

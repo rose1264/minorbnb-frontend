@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import withAuth from '../hocs/withAuth'
 import { addListing } from '../actions/listing';
 import { Redirect } from 'react-router'
-import { Button, Form, Segment } from 'semantic-ui-react'
+import { Button, Form, Segment, Container } from 'semantic-ui-react'
 import { fetchNeighbourhoods } from '../actions/neighbourhood'
 
 class CreateListingForm extends Component {
@@ -15,6 +15,7 @@ class CreateListingForm extends Component {
     host_id: this.props.host_id,
     neighbourhood_id: 1,
     fireRedirect: false,
+    avatars: null,
   }
 
   componentDidMount(){
@@ -28,13 +29,29 @@ class CreateListingForm extends Component {
       .then(JSONResponse=>this.props.fetchNeighbourhoods(JSONResponse))
   }
 
-  handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.addListing(this.state.name, this.state.price, this.state.address, this.state.description, this.state.host_id, this.state.neighbourhood_id);
+  handleFileUpload = e => {
+    console.log(e.target.files);
+    this.setState({
+      avatars: e.target.files,
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault()
+    this.props.addListing(
+      this.state.name,
+      this.state.price,
+      this.state.address,
+      this.state.description,
+      this.state.host_id,
+      this.state.neighbourhood_id,
+      this.state.avatars
+    );
+
     this.setState({
       name: "",
       price: 0,
@@ -43,63 +60,76 @@ class CreateListingForm extends Component {
       host_id: this.props.host_id,
       neighbourhood_id: 1,
       fireRedirect: true,
-     })
+      avatars: null,
+    })
   }
 
   render() {
     const { fireRedirect } = this.state
 
     return (
-      <Segment>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Field>
-            <Form.Input
-              label="name"
-              placeholder="name"
-              name="name"
-              onChange={this.handleChange}
-              value={this.state.name}
-            />
-            <Form.Input
-              label="price"
-              placeholder="price per night"
-              type="number"
-              name="price"
-              onChange={this.handleChange}
-              value={this.state.price}
-            />
-            <Form.Input
-              label="address"
-              placeholder="address"
-              type="text"
-              name="address"
-              onChange={this.handleChange}
-              value={this.state.address}
-            />
-            <Form.Input
-              label="description"
-              placeholder="description"
-              type="text"
-              name="description"
-              onChange={this.handleChange}
-              value={this.state.description}
-            />
-            <label>Neighbourhood:
-              <select
-                name="neighbourhood_id"
-                value={this.state.neighbourhood_id}
-                onChange={this.handleChange}>
-                {this.props.neighbourhoods.map(neighbourhood => <option key={neighbourhood.id} value={neighbourhood.id} >{neighbourhood.name}</option>)}
-              </select>
-            </label>
-          </Form.Field>
-          <Button type="submit">Add Listing</Button>
-        </Form>
+      <Container>
+        <Segment>
+          <Form
+            onSubmit={this.handleSubmit}
+            encType="multipart/form-data">
+            <Form.Field>
+              <Form.Input
+                label="name"
+                placeholder="name"
+                name="name"
+                onChange={this.handleChange}
+                value={this.state.name}
+              />
+              <Form.Input
+                label="price"
+                placeholder="price per night"
+                type="number"
+                name="price"
+                onChange={this.handleChange}
+                value={this.state.price}
+              />
+              <Form.Input
+                label="address"
+                placeholder="address"
+                type="text"
+                name="address"
+                onChange={this.handleChange}
+                value={this.state.address}
+              />
+              <Form.Input
+                label="description"
+                placeholder="description"
+                type="text"
+                name="description"
+                onChange={this.handleChange}
+                value={this.state.description}
+              />
+              <label>Neighbourhood
+                <select
+                  name="neighbourhood_id"
+                  value={this.state.neighbourhood_id}
+                  onChange={this.handleChange}>
+                  {this.props.neighbourhoods.map(neighbourhood => <option key={neighbourhood.id} value={neighbourhood.id} >{neighbourhood.name}</option>)}
+                </select>
+              </label>
+              <br />
+              <Form.Input
+                multiple
+                label="upload photos"
+                type="file"
+                name="avatars"
+                onChange={this.handleFileUpload}
+              />
+            </Form.Field>
+            <Button type="submit">Add Listing</Button>
+          </Form>
 
-        {fireRedirect && (
-          <Redirect to={'/listings'} />
-        )}
-      </Segment>
+          {fireRedirect && (
+            <Redirect to={'/listings'} />
+          )}
+        </Segment>
+      </Container>
     )
   }
 }

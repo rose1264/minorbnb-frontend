@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
 import { loginUser } from '../actions/user'
 import { Button, Form, Segment, Message } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 
 
 class LoginForm extends React.Component {
@@ -22,35 +23,37 @@ class LoginForm extends React.Component {
     return this.props.loggedIn ? (
       <Redirect to="/listings" />
     ) : (
-      <Segment>
-        <Form
-          onSubmit={this.handleLoginSubmit}
-          size="mini"
-          key="mini"
-          loading={this.props.authenticatingUser}
-          error={this.props.failedLogin}
-        >
-          <Message error header={this.props.failedLogin ? this.props.error : null} />
-          <Form.Field>
-            <Form.Input
-              label="name"
-              placeholder="name"
-              name="name"
-              onChange={this.handleChange}
-              value={this.state.name}
-            />
-            <Form.Input
-              type="password"
-              label="password"
-              placeholder="password"
-              name="password"
-              onChange={this.handleChange}
-              value={this.state.password}
-            />
-          </Form.Field>
-          <Button type="submit">Login</Button>
-        </Form>
-      </Segment>
+      <Container>
+        <Segment>
+          <Form
+            onSubmit={this.handleLoginSubmit}
+            size="mini"
+            key="mini"
+            loading={this.props.authenticatingUser}
+            error={this.props.failedLogin}
+          >
+            <Message error header={this.props.failedLogin ? this.props.error : null} />
+            <Form.Field>
+              <Form.Input
+                label="name"
+                placeholder="name"
+                name="name"
+                onChange={this.handleChange}
+                value={this.state.name}
+              />
+              <Form.Input
+                type="password"
+                label="password"
+                placeholder="password"
+                name="password"
+                onChange={this.handleChange}
+                value={this.state.password}
+              />
+            </Form.Field>
+            <Button type="submit">Login</Button>
+          </Form>
+        </Segment>
+      </Container>
     )
   }
 }

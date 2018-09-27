@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Reservation from './Reservation'
 import { fetchReservations } from '../actions/reservation'
+import { Container } from 'semantic-ui-react'
 
 class MyReservations extends Component {
   componentDidMount(){
@@ -17,10 +18,10 @@ class MyReservations extends Component {
 
   render(){
     return (
-      <div>
+      <Container>
         <h3>My Reservations</h3>
         {this.props.reservations.map(reservation => <Reservation key={reservation.id} reservation={reservation} />)}
-      </div>
+      </Container>
     )
   }
 }
