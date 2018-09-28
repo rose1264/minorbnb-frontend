@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Trip from './Trip'
 import { fetchTrips } from '../actions/trip'
 import withAuth from '../hocs/withAuth'
-import { Container } from 'semantic-ui-react'
+import { Container, Feed } from 'semantic-ui-react'
 import { Loader } from 'semantic-ui-react'
 
 class MyTrips extends Component {
@@ -20,16 +20,20 @@ class MyTrips extends Component {
   }
 
   render(){
-    console.log('reservation', this.props.addingReservation);
-    console.log('review',this.props.addingReview );
-
+    
       if(this.props.addingReservation || this.props.addingReview){
         return <Loader active inline="centered" />
       } else {
         return (
           <Container>
             <h3>My Trips</h3>
-            {this.props.trips.map(trip => <Trip key={trip.id} trip={trip} />)}
+            {this.props.trips.length !== 0 ?
+              <Feed>
+                {this.props.trips.map(trip => <Trip key={trip.id} trip={trip} />)}
+              </Feed>
+              :
+              <p>You don't have any trips yet! Check the listings and have some fun!</p>
+            }
           </Container>
         )
       }

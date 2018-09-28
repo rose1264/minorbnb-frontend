@@ -16,6 +16,7 @@ const ListingInfo = (props) => {
       <p><Icon name='dollar sign' />{props.listing.price} per night</p>
       <p><Icon name='map marker alternate' />Address: {props.listing.address}</p>
       <p><Icon name='file alternate outline' />{props.listing.description}</p>
+      <p><Icon name='mail' />{props.listing.host.email}</p>
     </center>
   )
 }

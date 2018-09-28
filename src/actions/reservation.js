@@ -24,8 +24,12 @@ export const addReservation = (check_in, check_out, guest_number, guest_id, list
           throw response
         }
       })
-      .then(JSONResponse => {dispatch({ type: ADD_RESERVATION, payload: JSONResponse })})
-      .then( ()=> dispatch({ type: ADDED_RESERVATION }))
+      .then(JSONResponse => {
+        dispatch({ type: ADD_RESERVATION, payload: JSONResponse })
+      })
+      .then(()=>{
+        setTimeout(() => dispatch({ type: ADDED_RESERVATION }, 2000))
+      })
       .catch(r => r.json().then(console.log))
 
   }

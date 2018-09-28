@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Reservation from './Reservation'
 import { fetchReservations } from '../actions/reservation'
-import { Container } from 'semantic-ui-react'
+import { Container, Feed } from 'semantic-ui-react'
 
 class MyReservations extends Component {
   componentDidMount(){
@@ -20,7 +20,13 @@ class MyReservations extends Component {
     return (
       <Container>
         <h3>My Reservations</h3>
-        {this.props.reservations.map(reservation => <Reservation key={reservation.id} reservation={reservation} />)}
+        {this.props.reservations.length !== 0 ?
+        <Feed>
+          {this.props.reservations.map(reservation => <Reservation key={reservation.id} reservation={reservation} />)}
+        </Feed>
+        :
+        <p>You don't have any reservations yet! Change the description and make your listing shine!</p>
+        }
       </Container>
     )
   }
