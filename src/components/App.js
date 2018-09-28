@@ -14,10 +14,11 @@ import MyTrips from './MyTrips'
 import MyReviews from './MyReviews'
 import MyReservations from './MyReservations'
 import CreateReviewForm from './CreateReviewForm'
+import Home from './Home'
 
 class App extends Component {
   componentDidMount() {
-    if (this.props.location.pathname !== '/login' && this.props.location.pathname !== '/signup'){
+    if (this.props.location.pathname !== '/login' && this.props.location.pathname !== '/signup' && this.props.location.pathname !== '/'){
       if (this.props.user.user === null) this.props.fetchCurrentUser()
     }
   }
@@ -32,6 +33,7 @@ class App extends Component {
             <Route exact path="/login" component={LoginForm} />
             <Route exact path="/signup" component={SignupForm} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/" component={Home} />
           </Switch>
           { loggedIn ? (
             <Fragment>

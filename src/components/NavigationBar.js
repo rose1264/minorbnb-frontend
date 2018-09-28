@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { NavLink, withRouter, Link } from 'react-router-dom'
-import { Menu, Header, Icon } from 'semantic-ui-react'
+import { Menu, Header, Icon, Dropdown } from 'semantic-ui-react'
 import { logOut } from '../actions/user.js'
 
 const logout = (func) => {
@@ -25,17 +25,21 @@ const NavigationBar = (props) => {
             </Header>
           </Menu.Item>
 
-
           <Menu.Menu position="right">
-            <Menu.Item as={NavLink} to="/listings/new" name="Create a listing" active={pathname === '/listings/new'} />
-            <Menu.Item as={NavLink} to="/reservations/" name="My Reservations" active={pathname === '/reservations/'} />
-            <Menu.Item as={NavLink} to="/trips/" name="My Trips" active={pathname === '/trips/'} />
-            <Menu.Item as={NavLink} to="/reviews/" name="My Reviews" active={pathname === '/reviews/'} />
-            <Menu.Item as={NavLink} to="/login" name="Logout" onClick={() => {logout(logOut)}} active={pathname === '/login'} >
+            <Menu.Item as={NavLink} to="/" name="Logout" onClick={() => {logout(logOut)}} active={pathname === '/'} >
               <Icon name='sign out alternate' />Logout
             </Menu.Item>
-            <Menu.Item as={NavLink} to="/profile" name="Profile" active={pathname === '/profile'}>
-              <Icon name='user circle' />
+            <Menu.Item>
+              <Dropdown icon="user circle">
+                <Dropdown.Menu>
+                  <Dropdown.Header><h4>guest channel</h4></Dropdown.Header>
+                    <Menu.Item as={NavLink} to="/trips/" name="My Trips" active={pathname === '/trips/'} />
+                    <Menu.Item as={NavLink} to="/reviews/" name="My Reviews" active={pathname === '/reviews/'} />
+                  <Dropdown.Header><h4>host channel</h4></Dropdown.Header>
+                    <Menu.Item as={NavLink} to="/listings/new" name="Create a listing" active={pathname === '/listings/new'} />
+                    <Menu.Item as={NavLink} to="/reservations/" name="My Reservations" active={pathname === '/reservations/'} />
+                </Dropdown.Menu>
+              </Dropdown>
             </Menu.Item>
           </Menu.Menu>
         </Fragment>
