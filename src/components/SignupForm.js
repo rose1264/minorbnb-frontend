@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { Component }from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
 import { signupUser } from '../actions/user'
 import { Container, Button, Form, Segment, Message } from 'semantic-ui-react'
 import ReactDropzone from 'react-dropzone';
 
-class SignupForm extends React.Component {
+class SignupForm extends Component {
   state = {
     name: '',
     password: '',
