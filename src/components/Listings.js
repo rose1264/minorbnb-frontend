@@ -13,23 +13,25 @@ class Listings extends Component {
     page: 1,
     totalPages: null,
     listings: [],
+    scrolling: false,
   }
 
   componentDidMount(){
-    const url = `${process.env.REACT_APP_API_ENDPOINT}/api/v1/listings`
-    fetch(url, {
-      headers: {
-        method: 'GET',
-        Authorization: `Bearer ${localStorage.getItem('jwt')}`
-      }
+    this.loadListings()
+    this.scrollListner = window.addEventListener('scroll', e => {
+      this.handleScroll(e)
     })
-      .then(r=>r.json())
-      .then(json => {
-        this.setState({
-          searchedListings: json,
-          listings: json,
-        })
-      })
+  }
+
+  handleScroll = e => {
+    const { scrolling, totalPages, page } = this.state
+    if (scrolling) return
+    if (totalPages <= page) return
+    const lastCard = document.querySelector('.cards > div:last-child')
+    const lastCardOffset = lastCard.offsetTop + lastCard.clientHeight
+    const pageOffset = window.pageYOffset + window.innerHeight
+    var bottomOffset = 20
+    if (pageOffset > lastCardOffset - bottomOffset) this.loadMore()
   }
 
   loadListings = () => {
@@ -44,15 +46,18 @@ class Listings extends Component {
       .then(r=>r.json())
       .then(json => {
         this.setState({
-          searchedListings:[...this.state.listings, ...json],
-          listings:[...this.state.listings, ...json],
+          searchedListings:[...listings, ...json],
+          listings:[...listings, ...json],
+          scrolling: false,
+          totalPages: json.total_pages,
         })
       })
   }
 
   loadMore = () => {
     this.setState(prevState => ({
-      page: prevState.page + 1
+      page: prevState.page + 1,
+      scrolling: true,
     }), this.loadListings)
   }
 
@@ -80,7 +85,7 @@ class Listings extends Component {
           <Card.Group>
             {this.state.searchedListings.map(listing => <Listing key={listing.id} listing={listing} />)}
           </Card.Group>
-          <a onClick={this.loadMore}>Load More</a>
+
         </Container>
       )
 
