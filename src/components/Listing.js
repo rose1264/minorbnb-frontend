@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { selectListing } from '../actions/listing'
 import { Card, Image, Button } from 'semantic-ui-react'
+import Slider from "react-slick";
 
 
 class Listing extends Component {
@@ -27,13 +28,40 @@ class Listing extends Component {
   render(){
 
     let avatarUrl = null
+    let avatarUrlTwo = null
+    let avatarUrlThree = null
+    let avatarUrlFour = null
     if(this.props.listing.avatars){
       avatarUrl = this.props.listing.avatars[0].url
+      if(this.props.listing.avatars[1]){
+        avatarUrlTwo = this.props.listing.avatars[1].url
+        if(this.props.listing.avatars[2]){
+          avatarUrlThree = this.props.listing.avatars[2].url
+          if(this.props.listing.avatars[3]){
+            avatarUrlFour = this.props.listing.avatars[3].url
+          }
+        }
+      }
+
+    }
+
+    const settings= {
+      infinite: true,
+      speed: 3000,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 4000
     }
 
     return (
-      <Card>
-        <Image height='300px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrl}`} />
+      <Card style={{margin: 15}}>
+        <Slider {...settings}>
+          <Image height='300px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrl}`} />
+          {avatarUrlTwo ? <Image height='300px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrlTwo}`} /> : null}
+          {avatarUrlThree ? <Image height='300px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrlThree}`} /> : null}
+          {avatarUrlFour ? <Image height='300px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrlFour}`} /> : null}
+        </Slider>
         <Card.Content>
           <Card.Header>{this.props.listing.name}</Card.Header>
           <Card.Meta>$ {this.props.listing.price} per night</Card.Meta>

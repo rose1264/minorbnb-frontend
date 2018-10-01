@@ -2,16 +2,45 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Image, Icon } from 'semantic-ui-react'
 import withAuth from '../hocs/withAuth'
+import Slider from "react-slick";
+
 
 const ListingInfo = (props) => {
-
   let avatarUrl = null
+  let avatarUrlTwo = null
+  let avatarUrlThree = null
+  let avatarUrlFour = null
   if(props.listing.avatars){
     avatarUrl = props.listing.avatars[0].url
+    if(props.listing.avatars[1]){
+      avatarUrlTwo = props.listing.avatars[1].url
+      if(props.listing.avatars[2]){
+        avatarUrlThree = props.listing.avatars[2].url
+        if(props.listing.avatars[3]){
+          avatarUrlFour = props.listing.avatars[3].url
+        }
+      }
+    }
+
   }
+
+  const settings= {
+    infinite: true,
+    speed: 3000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 4000
+  }
+
   return (
     <center>
-      <Image width="700px"  src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrl}`} />
+      <Slider {...settings}>
+        <Image height='700px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrl}`} />
+        {avatarUrlTwo ? <Image height='700px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrlTwo}`} /> : null}
+        {avatarUrlThree ? <Image height='700px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrlThree}`} /> : null}
+        {avatarUrlFour ? <Image height='700px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrlFour}`} /> : null}
+      </Slider>
       <p><Icon name='home' />{props.listing.name}</p>
       <p><Icon name='dollar sign' />{props.listing.price} per night</p>
       <p><Icon name='map marker alternate' />Address: {props.listing.address}</p>
