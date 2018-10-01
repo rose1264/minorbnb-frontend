@@ -4,6 +4,7 @@ import withAuth from '../hocs/withAuth'
 import { addReservation } from '../actions/reservation'
 import { Redirect } from 'react-router'
 import { Button, Form, Segment, Container } from 'semantic-ui-react'
+import ReactDropzone from 'react-dropzone';
 
 class CreateReservationForm extends Component {
   state = {
@@ -18,9 +19,9 @@ class CreateReservationForm extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  handleFileUpload = e => {
+  handleFileDrop = files => {
     this.setState({
-      file: e.target.files[0],
+      file: files[0],
     });
   };
 
@@ -46,7 +47,7 @@ class CreateReservationForm extends Component {
 
   render() {
     const { fireRedirect } = this.state
-    
+
     return (
       (this.props.host_id === this.props.guest_id ?
         null
@@ -79,12 +80,16 @@ class CreateReservationForm extends Component {
                 onChange={this.handleChange}
                 value={this.state.guest_number}
               />
-              <Form.Input
-                label="upload your school holiday release form here"
-                type="file"
-                name="file"
-                onChange={this.handleFileUpload}
-              />
+
+              {this.state.file ?
+                <div>
+                  <h2>Your file has been uploaded!</h2>
+                </div>
+                :
+                <ReactDropzone onDrop={this.handleFileDrop} style={{position: "relative", width: 200, height: 100, border:"1px dashed grey"}}>
+                  <center>Upload your school release form here</center>
+                </ReactDropzone>
+              }
             </Form.Field>
             <Button type="submit">Add Reservation</Button>
           </Form>

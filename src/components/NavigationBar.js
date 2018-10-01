@@ -32,6 +32,7 @@ const NavigationBar = (props) => {
             <Menu.Item>
               <Dropdown icon="user circle">
                 <Dropdown.Menu>
+                    <Menu.Item as={NavLink} to="/profile" name="Your Profile" active={pathname === 'profile'} />
                   <Dropdown.Header><h4>guest channel</h4></Dropdown.Header>
                     <Menu.Item as={NavLink} to="/trips/" name="My Trips" active={pathname === '/trips/'} />
                     <Menu.Item as={NavLink} to="/reviews/" name="My Reviews" active={pathname === '/reviews/'} />

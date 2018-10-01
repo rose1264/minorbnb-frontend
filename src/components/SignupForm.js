@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
 import { signupUser } from '../actions/user'
 import { Container, Button, Form, Segment, Message } from 'semantic-ui-react'
+import ReactDropzone from 'react-dropzone';
 
 class SignupForm extends React.Component {
   state = {
@@ -18,9 +19,9 @@ class SignupForm extends React.Component {
      })
   }
 
-  handleFileUpload = e => {
+  handleFileDrop = files => {
     this.setState({
-      avatar: e.target.files[0],
+      avatar: files[0],
     });
   };
 
@@ -71,12 +72,15 @@ class SignupForm extends React.Component {
                 onChange={this.handleChange}
                 value={this.state.password}
               />
-              <Form.Input
-                label="upload your profile picture"
-                type="file"
-                name="avatar"
-                onChange={this.handleFileUpload}
-              />
+              <ReactDropzone onDrop={this.handleFileDrop} style={{position: "relative", width: 200, height: 100, border:"1px dashed grey"}}>
+                <center>Drop your profile photo here</center>
+              </ReactDropzone>
+              {this.state.avatar ?
+                <div>
+                  <h2>Uploading {this.state.avatar.length} files...</h2>
+                  <img width="100px" src={this.state.avatar.preview} alt="profile"/>
+                </div>
+                : null}
             </Form.Field>
             <Button type="submit">Sign Up</Button>
           </Form>
@@ -84,6 +88,7 @@ class SignupForm extends React.Component {
       </Container>
     )
   }
+
 }
 
 const mapStateToProps = ({ usersReducer: { authenticatingUser, failedLogin, error, loggedIn } }) => ({

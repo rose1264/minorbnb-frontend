@@ -5,6 +5,7 @@ import { addListing } from '../actions/listing';
 import { Redirect } from 'react-router'
 import { Button, Form, Segment, Container } from 'semantic-ui-react'
 import { fetchNeighbourhoods } from '../actions/neighbourhood'
+import ReactDropzone from 'react-dropzone';
 
 class CreateListingForm extends Component {
   state = {
@@ -33,9 +34,9 @@ class CreateListingForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleFileUpload = e => {
+  handleFileDrop = files => {
     this.setState({
-      avatars: e.target.files,
+      avatars: files,
     });
   };
 
@@ -65,7 +66,6 @@ class CreateListingForm extends Component {
 
   render() {
     const { fireRedirect } = this.state
-
     return (
       <Container>
         <Segment>
@@ -113,13 +113,19 @@ class CreateListingForm extends Component {
                 </select>
               </label>
               <br />
-              <Form.Input
-                multiple
-                label="upload photos"
-                type="file"
-                name="avatars"
-                onChange={this.handleFileUpload}
-              />
+              <ReactDropzone multiple onDrop={this.handleFileDrop} style={{position: "relative", width: 200, height: 100, border:"1px dashed grey"}}>
+                <center>Drop photos here </center>
+                <center>(less then 4 pictures)</center>
+              </ReactDropzone>
+              {this.state.avatars ?
+                <div>
+                  <h2>Uploading {this.state.avatars.length} files...</h2>
+                  <img width="100px" src={this.state.avatars[0].preview} alt="listing" style={{margin: 10, width: 200, height: 100, border:"1px solid grey"}}/>
+                  {this.state.avatars[1]? <img width="100px" src={this.state.avatars[1].preview} alt="listing" style={{margin: 10, width: 200, height: 100, border:"1px solid grey"}}/>:null}
+                  {this.state.avatars[2]? <img width="100px" src={this.state.avatars[2].preview} alt="listing" style={{margin: 10, width: 200, height: 100, border:"1px solid grey"}}/>:null}
+                  {this.state.avatars[3]? <img width="100px" src={this.state.avatars[3].preview} alt="listing" style={{margin: 10, width: 200, height: 100, border:"1px solid grey"}}/>:null}
+                </div>
+                : null}
             </Form.Field>
             <Button type="submit">Add Listing</Button>
           </Form>
