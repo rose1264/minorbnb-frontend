@@ -11,6 +11,9 @@ export const addListing = (name, price, address, description, host_id, neighbour
   return (dispatch) => {
     dispatch({type: ADDING_LISTING})
 
+    let lat
+    let lng
+
     let data = new FormData()
     data.append('name', name)
     data.append('price', price)
@@ -22,21 +25,33 @@ export const addListing = (name, price, address, description, host_id, neighbour
     data.append('avatars[]', avatars[1])
     data.append('avatars[]', avatars[2])
 
-    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/listings`, {
-      method: 'POST',
-      headers: {Authorization: `Bearer ${localStorage.getItem('jwt')}`},
-      body: data,
-    })
-      .then(response => {
-        if (response.ok) {
-          return response.json()
-        } else {
-          throw response
-        }
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_API_KEY}`)
+      .then(res=>res.json())
+      .then(res=>{
+        lat=res.results[0].geometry.location.lat
+        lng=res.results[0].geometry.location.lng
+        data.append('lat', lat)
+        data.append('lng', lng)
+
+        fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/listings`, {
+          method: 'POST',
+          headers: {Authorization: `Bearer ${localStorage.getItem('jwt')}`},
+          body: data,
+        })
+        .then(response => {
+          if (response.ok) {
+            return response.json()
+          } else {
+            throw response
+          }
+        })
+        .then(JSONResponse => dispatch({ type: ADD_LISTING, payload: JSONResponse }))
+        .then(()=>dispatch({ type: ADDED_LISTING }))
+        .catch(r => r.json().then(console.log))
+
       })
-      .then(JSONResponse => dispatch({ type: ADD_LISTING, payload: JSONResponse }))
-      .then(()=>dispatch({ type: ADDED_LISTING }))
       .catch(r => r.json().then(console.log))
+
 
   }
 }

@@ -5,6 +5,9 @@ import { addReservation } from '../actions/reservation'
 import { Redirect } from 'react-router'
 import { Button, Form, Segment, Container } from 'semantic-ui-react'
 import ReactDropzone from 'react-dropzone';
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+import { DateRangePicker } from 'react-dates';
 
 class CreateReservationForm extends Component {
   state = {
@@ -13,6 +16,7 @@ class CreateReservationForm extends Component {
     guest_number: 1,
     fireRedirect: false,
     file: null,
+
   }
 
   handleChange = (event) => {
@@ -47,7 +51,6 @@ class CreateReservationForm extends Component {
 
   render() {
     const { fireRedirect } = this.state
-
     return (
       (this.props.host_id === this.props.guest_id ?
         null
@@ -58,22 +61,25 @@ class CreateReservationForm extends Component {
         <Segment>
           <Form onSubmit={this.handleSubmit}>
             <Form.Field>
-              <Form.Input
-                label="check_in"
-                type="date"
-                name="check_in"
-                onChange={this.handleChange}
-                value={this.state.check_in}
+              <p><strong>choose your check in & check out date here</strong></p>
+              <DateRangePicker
+                startDate={this.state.check_in}
+                startDateId="start"
+                endDateId="end"
+                endDate={this.state.check_out}
+                onDatesChange={({ startDate, endDate }) => {
+                  this.setState({
+                    check_in: startDate,
+                    check_out: endDate,
+                  })
+                }}
+                focusedInput={this.state.focusedInput}
+                onFocusChange={focusedInput => this.setState({ focusedInput })}
               />
+              <br/>
+              <br/>
+              <p><strong>choose the guest number here</strong></p>
               <Form.Input
-                label="check_out"
-                type="date"
-                name="check_out"
-                onChange={this.handleChange}
-                value={this.state.check_out}
-              />
-              <Form.Input
-                label="guest number"
                 placeholder="guest number"
                 type="number"
                 name="guest_number"
@@ -86,9 +92,12 @@ class CreateReservationForm extends Component {
                   <h2>Your file has been uploaded!</h2>
                 </div>
                 :
-                <ReactDropzone onDrop={this.handleFileDrop} style={{position: "relative", width: 200, height: 100, border:"1px dashed grey"}}>
-                  <center>Upload your school release form here</center>
-                </ReactDropzone>
+                <div>
+                  <p><strong>upload the school release file need to be signed by the host</strong></p>
+                  <ReactDropzone onDrop={this.handleFileDrop} style={{position: "relative", width: 200, height: 100, border:"1px dashed grey"}}>
+                    <center>upload file here</center>
+                  </ReactDropzone>
+                </div>
               }
             </Form.Field>
             <Button type="submit">Add Reservation</Button>
