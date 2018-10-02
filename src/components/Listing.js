@@ -66,6 +66,7 @@ class Listing extends Component {
           <Card.Header>{this.props.listing.name}</Card.Header>
           <Card.Meta>$ {this.props.listing.price} per night</Card.Meta>
           <Card.Meta>address: {this.props.listing.address}</Card.Meta>
+          <Card.Meta>neighbourhood: {this.props.listing.neighbourhood.name}</Card.Meta>
           <Card.Description>{this.props.listing.description}</Card.Description>
         </Card.Content>
         {this.renderRedirect()}

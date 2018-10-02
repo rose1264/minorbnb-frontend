@@ -7,20 +7,30 @@ import { Loader } from 'semantic-ui-react'
 import SearchBar from './SearchBar'
 
 class Listings extends Component {
-  state = {
-    searchTerm: '',
-    searchedListings:[],
-    page: 1,
-    totalPages: null,
-    listings: [],
-    scrolling: false,
+  constructor(props){
+    super(props)
+    this.state = {
+      searchTerm: '',
+      searchedListings:[],
+      page: 1,
+      totalPages: null,
+      listings: [],
+      scrolling: false,
+    }
   }
 
+  scrollListner = () => {
+    window.addEventListener('scroll', this.handleScroll, false)
+  }
+  
   componentDidMount(){
     this.loadListings()
-    this.scrollListner = window.addEventListener('scroll', e => {
-      this.handleScroll(e)
-    })
+    this.scrollListner()
+  }
+
+  componentWillUnmount(){
+    window.removeEventListener('scroll', this.handleScroll, false);
+
   }
 
   handleScroll = e => {
