@@ -36,10 +36,10 @@ const ListingInfo = (props) => {
   return (
     <center>
       <Slider {...settings}>
-        <Image height='700px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrl}`} />
-        {avatarUrlTwo ? <Image height='700px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrlTwo}`} /> : null}
-        {avatarUrlThree ? <Image height='700px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrlThree}`} /> : null}
-        {avatarUrlFour ? <Image height='700px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrlFour}`} /> : null}
+        <Image width='50%' height='300px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrl}`} />
+        {avatarUrlTwo ? <Image width='50%' height='300px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrlTwo}`} /> : null}
+        {avatarUrlThree ? <Image width='50%' height='300px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrlThree}`} /> : null}
+        {avatarUrlFour ? <Image width='50%' height='300px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrlFour}`} /> : null}
       </Slider>
       <p><Icon name='home' />{props.listing.name}</p>
       <p><Icon name='dollar sign' />{props.listing.price} per night</p>

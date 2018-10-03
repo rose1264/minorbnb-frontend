@@ -20,7 +20,7 @@ class MyReservations extends Component {
     return (
       <Container>
         <h3>My Reservations</h3>
-        {this.props.reservations.length !== 0 ?
+        {this.props.reservations && this.props.reservations.length !== 0 ?
         <Feed>
           {this.props.reservations.map(reservation => <Reservation key={reservation.id} reservation={reservation} />)}
         </Feed>
@@ -33,7 +33,7 @@ class MyReservations extends Component {
 }
 
 function mapStateToProps(state) {
-  return{
+  return {
     user_id: state.usersReducer.user.id,
     reservations: state.reservationsReducer.reservations
   }

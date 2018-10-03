@@ -19,7 +19,9 @@ import Footer from './Footer'
 
 class App extends Component {
   componentDidMount() {
-    if (this.props.location.pathname !== '/login' && this.props.location.pathname !== '/signup' && this.props.location.pathname !== '/'){
+    if (this.props.location.pathname !== '/login'
+    && this.props.location.pathname !== '/signup'
+    && this.props.location.pathname !== '/'){
       if (this.props.user.user === null) this.props.fetchCurrentUser()
     }
   }
