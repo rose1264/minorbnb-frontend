@@ -22,7 +22,7 @@ class ListingMap extends Component {
       let center = {lat, lng}
       return (
         <center>
-          <div style={{ height: '50vh', width: '50%' }}>
+          <div style={{ height: '80vh', width: '100%' }}>
             <GoogleMapReact
               bootstrapURLKeys={{ key: `${process.env.REACT_APP_API_KEY}` }}
               defaultCenter={center}

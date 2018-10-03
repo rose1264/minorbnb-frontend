@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { selectListing } from '../actions/listing'
 import { Card, Image, Button } from 'semantic-ui-react'
 import Slider from "react-slick";
+import history from './history'
 
 
 class Listing extends Component {
@@ -21,6 +22,7 @@ class Listing extends Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
+      history.push('/listings');
       return <Redirect to='/listings/detail' />
     }
   }
