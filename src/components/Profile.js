@@ -8,12 +8,13 @@ import { fetchTrips } from '../actions/trip.js'
 
 class Profile extends Component {
   componentDidMount(){
-    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${this.props.user_id}`,{
-      headers: {
-        method: 'GET',
-        Authorization: `Bearer ${localStorage.getItem('jwt')}`
-      }
-    })
+    if (this.props.user_id){
+      fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${this.props.user_id}`,{
+        headers: {
+          method: 'GET',
+          Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        }
+      })
       .then(r=>r.json())
       .then(JSONResponse=>this.props.fetchListings(JSONResponse.listings))
 
@@ -23,17 +24,18 @@ class Profile extends Component {
           Authorization: `Bearer ${localStorage.getItem('jwt')}`
         }
       })
-        .then(r=>r.json())
-        .then(JSONResponse=>this.props.fetchReservations(JSONResponse.reservations))
+      .then(r=>r.json())
+      .then(JSONResponse=>this.props.fetchReservations(JSONResponse.reservations))
 
-        fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${this.props.user_id}`,{
-          headers: {
-            method: 'GET',
-            Authorization: `Bearer ${localStorage.getItem('jwt')}`
-          }
-        })
-          .then(r=>r.json())
-          .then(JSONResponse=>this.props.fetchTrips(JSONResponse.trips))
+      fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${this.props.user_id}`,{
+        headers: {
+          method: 'GET',
+          Authorization: `Bearer ${localStorage.getItem('jwt')}`
+        }
+      })
+      .then(r=>r.json())
+      .then(JSONResponse=>this.props.fetchTrips(JSONResponse.trips))
+    }
   }
 
   render(){
@@ -77,8 +79,8 @@ class Profile extends Component {
             <Segment.Group>
               {this.props.listings? this.props.listings.map(listing => {
                 return (
-                  <Segment>
-                    <img src={`${process.env.REACT_APP_API_ENDPOINT}/${listing.avatars[0].thumb.url}`} />
+                  <Segment key={listing.id}>
+                    <img src={`${process.env.REACT_APP_API_ENDPOINT}/${listing.avatars[0].thumb.url}`} alt='listing'/>
                     &nbsp;&nbsp;&nbsp;{listing.name}
                   </Segment>
                 )
@@ -95,7 +97,7 @@ class Profile extends Component {
               {this.props.reservations?
                 this.props.reservations.map(reservation => {
                 return (
-                  <Segment  secondary>
+                  <Segment  secondary key={reservation.id}>
                     <p>{reservation.check_in} - {reservation.check_out}</p>
                     <p>Guest number: {reservation.guest_number}</p>
                   </Segment>
@@ -114,7 +116,7 @@ class Profile extends Component {
               {this.props.trips?
                 this.props.trips.map(trip => {
                 return (
-                  <Segment  tertiary>
+                  <Segment  tertiary key={trip.id}>
                     <p>Destination: {trip.listing.name}</p>
                     <p>{trip.check_in} - {trip.check_out}</p>
                   </Segment>

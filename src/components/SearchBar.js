@@ -6,7 +6,7 @@ class SearchBar extends Component {
 
     return (
       <center>
-        <form style={{margin:20}}>
+        <form style={{margin:20}} onSubmit={(e) => e.preventDefault()}>
           <input
             style={{height: 30, width: 500}}
             value={this.props.searchTerm}

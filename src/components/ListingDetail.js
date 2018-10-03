@@ -10,6 +10,8 @@ import ListingMap from './ListingMap'
 
 const ListingDetail = props => {
 
+    window.scrollTo(0, 0)
+    
     if (!props.listing.host){
       return <Redirect to='/listings' component={Listings}/>
     } else {

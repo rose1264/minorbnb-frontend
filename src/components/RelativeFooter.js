@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Footer = prop =>{
+const RelativeFooter = prop =>{
   return (
-    <div className='fixedfooter'>
+    <div className='relativefooter'>
       <br/>
     &nbsp;&nbsp;  © 2018 MinorBnb, Inc. All Rights Reserved
       <br/>
@@ -10,4 +10,4 @@ const Footer = prop =>{
   )
 }
 
-export default Footer
+export default RelativeFooter

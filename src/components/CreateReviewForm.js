@@ -4,6 +4,7 @@ import withAuth from '../hocs/withAuth'
 import { addReview } from '../actions/review'
 import { Redirect } from 'react-router'
 import { Button, Form, Segment, Container } from 'semantic-ui-react'
+import StarRatingComponent from 'react-star-rating-component';
 
 class CreateReviewForm extends Component {
   state = {
@@ -16,6 +17,10 @@ class CreateReviewForm extends Component {
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
+  }
+
+  onStarClick = (nextValue, prevValue, name) => {
+    this.setState({rating: nextValue});
   }
 
   handleSubmit = (event) => {
@@ -39,12 +44,12 @@ class CreateReviewForm extends Component {
         <Segment>
           <Form onSubmit={this.handleSubmit}>
             <Form.Field>
-              <Form.Input
-                label="rating"
-                type="number"
-                name="rating"
-                onChange={this.handleChange}
+              <p>Rating from state: {this.state.rating}</p>
+              <StarRatingComponent
+                name="rate"
+                starCount={5}
                 value={this.state.rating}
+                onStarClick={this.onStarClick}
               />
               <Form.Input
                 label="description"
@@ -62,7 +67,7 @@ class CreateReviewForm extends Component {
           )}
         </Segment>
       </Container>
-      
+
     )
   }
 }

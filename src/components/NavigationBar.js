@@ -30,7 +30,8 @@ const NavigationBar = (props) => {
               <Icon name='sign out alternate' />Logout
             </Menu.Item>
             <Menu.Item>
-              <Dropdown icon="user circle">
+
+              <Dropdown  icon="user circle">
                 <Dropdown.Menu>
                     <Menu.Item as={NavLink} to="/profile" name="Your Profile" active={pathname === 'profile'} />
                   <Dropdown.Header><h4>guest channel</h4></Dropdown.Header>
