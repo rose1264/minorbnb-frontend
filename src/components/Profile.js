@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Image } from 'semantic-ui-react'
+import { Container, Grid, Image } from 'semantic-ui-react'
 import withAuth from '../hocs/withAuth'
 
 const Profile = props => {
@@ -10,10 +10,18 @@ const Profile = props => {
   }
 
   return(
-    <center>
-      <Image src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarDemoUrl}`} />
-      <h3>{props.user.user.name}</h3>
-    </center>
+    <Container>
+      <Grid>
+        <Grid.Column width={4}>
+          <Image src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarDemoUrl}`} />
+          <h3>{props.user.user.name}</h3>
+        </Grid.Column>
+        <Grid.Column width={12}>
+          <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+        </Grid.Column>
+      </Grid>
+    </Container>
+
   )
 }
 

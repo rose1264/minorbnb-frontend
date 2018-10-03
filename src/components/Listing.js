@@ -55,7 +55,7 @@ class Listing extends Component {
     }
 
     return (
-      <Card style={{margin: 12}}>
+      <Card style={{margin: 'auto', marginBottom: 20}}>
         <Slider {...settings}>
           <Image height='300px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrl}`} />
           {avatarUrlTwo ? <Image height='300px' src={`${process.env.REACT_APP_API_ENDPOINT}/${avatarUrlTwo}`} /> : null}

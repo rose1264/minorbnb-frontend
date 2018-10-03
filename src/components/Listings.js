@@ -22,7 +22,7 @@ class Listings extends Component {
   scrollListner = () => {
     window.addEventListener('scroll', this.handleScroll, false)
   }
-  
+
   componentDidMount(){
     this.loadListings()
     this.scrollListner()
@@ -91,11 +91,9 @@ class Listings extends Component {
       return(
         <Container>
           <SearchBar handleChange={this.handleChange} searchTerm={this.state.searchTerm}/>
-
           <Card.Group>
             {this.state.searchedListings.map(listing => <Listing key={listing.id} listing={listing} />)}
           </Card.Group>
-
         </Container>
       )
 

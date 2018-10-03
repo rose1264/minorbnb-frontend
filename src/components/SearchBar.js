@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Icon } from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react'
 
 class SearchBar extends Component {
 
@@ -8,14 +8,14 @@ class SearchBar extends Component {
     return (
       <center>
         <form style={{margin:20}}>
-
           <input
             style={{height: 30, width: 500}}
             value={this.props.searchTerm}
             onChange={this.props.handleChange}
-            placeholder="Search for name, price, address or neighbourhood..."
+            placeholder=" 🔍 Search for name, price, address or neighbourhood..."
           />
-          <Button style={{margin:20}}><Icon name='search'/></Button>
+          <br/>
+          <br/>
         </form>
       </center>
     )

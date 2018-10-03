@@ -15,6 +15,7 @@ import MyReviews from './MyReviews'
 import MyReservations from './MyReservations'
 import CreateReviewForm from './CreateReviewForm'
 import Home from './Home'
+import Footer from './Footer'
 
 class App extends Component {
   componentDidMount() {
@@ -46,6 +47,7 @@ class App extends Component {
               <Route exact path="/reviews/new" component={CreateReviewForm} />
             </Fragment>
           ) : null}
+          <Footer />
         </Fragment>
       </Router>
     )
