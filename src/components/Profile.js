@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Container, Grid, Image, Card, Icon, Segment, Header } from 'semantic-ui-react'
+import { Container, Grid, Image, Card, Icon, Segment, Header, Button } from 'semantic-ui-react'
 import withAuth from '../hocs/withAuth'
 import { fetchListings } from '../actions/listing.js'
 import { fetchReservations} from '../actions/reservation.js'
@@ -38,6 +38,10 @@ class Profile extends Component {
     }
   }
 
+  handleProfileEditClick = () => {
+    console.log('handleProfileEditClick');
+  }
+  
   render(){
     let avatarUrl = null
     if (this.props.user) {
@@ -68,8 +72,10 @@ class Profile extends Component {
                   {this.props.user.trips.length} Trips
                 </p>
               </Card.Content>
+              <Button onClick={this.handleProfileEditClick}><Icon name='edit' /></Button>
             </Card>
           </Grid.Column>
+
           <Grid.Column width={12}>
 
             <Header as='h3'>
