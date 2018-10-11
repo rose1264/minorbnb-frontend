@@ -27,18 +27,7 @@
   to { transform: rotate(360deg); }
 }
 
-.fixedfooter {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    border-top: 1.5px solid #c7cdd6;
-    color: black;
-    text-align: left;
-    margin-top: 20px;
-}
-
-.relativefooter {
+.footer {
     position: relative;
     left: 0;
     bottom: 0;

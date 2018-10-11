@@ -20,7 +20,7 @@ class Listings extends Component {
   }
 
   scrollListner = () => {
-    window.addEventListener('scroll', this.handleScroll)
+    window.addEventListener('scroll', this.handleScroll, false)
   }
 
   componentDidMount(){
@@ -29,7 +29,7 @@ class Listings extends Component {
   }
 
   componentWillUnmount(){
-    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('scroll', this.handleScroll, false);
 
   }
 

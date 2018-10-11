@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Container, Grid, Image, Card, Icon, Segment, Header, Button } from 'semantic-ui-react'
+import { Container, Grid, Image, Card, Icon, Segment, Header } from 'semantic-ui-react'
 import withAuth from '../hocs/withAuth'
 import { fetchListings } from '../actions/listing.js'
 import { fetchReservations} from '../actions/reservation.js'
@@ -8,13 +8,12 @@ import { fetchTrips } from '../actions/trip.js'
 
 class Profile extends Component {
   componentDidMount(){
-    if (this.props.user_id){
-      fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${this.props.user_id}`,{
-        headers: {
-          method: 'GET',
-          Authorization: `Bearer ${localStorage.getItem('jwt')}`
-        }
-      })
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${this.props.user_id}`,{
+      headers: {
+        method: 'GET',
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`
+      }
+    })
       .then(r=>r.json())
       .then(JSONResponse=>this.props.fetchListings(JSONResponse.listings))
 
@@ -24,24 +23,19 @@ class Profile extends Component {
           Authorization: `Bearer ${localStorage.getItem('jwt')}`
         }
       })
-      .then(r=>r.json())
-      .then(JSONResponse=>this.props.fetchReservations(JSONResponse.reservations))
+        .then(r=>r.json())
+        .then(JSONResponse=>this.props.fetchReservations(JSONResponse.reservations))
 
-      fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${this.props.user_id}`,{
-        headers: {
-          method: 'GET',
-          Authorization: `Bearer ${localStorage.getItem('jwt')}`
-        }
-      })
-      .then(r=>r.json())
-      .then(JSONResponse=>this.props.fetchTrips(JSONResponse.trips))
-    }
+        fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users/${this.props.user_id}`,{
+          headers: {
+            method: 'GET',
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`
+          }
+        })
+          .then(r=>r.json())
+          .then(JSONResponse=>this.props.fetchTrips(JSONResponse.trips))
   }
 
-  handleProfileEditClick = () => {
-    console.log('handleProfileEditClick');
-  }
-  
   render(){
     let avatarUrl = null
     if (this.props.user) {
@@ -72,10 +66,8 @@ class Profile extends Component {
                   {this.props.user.trips.length} Trips
                 </p>
               </Card.Content>
-              <Button onClick={this.handleProfileEditClick}><Icon name='edit' /></Button>
             </Card>
           </Grid.Column>
-
           <Grid.Column width={12}>
 
             <Header as='h3'>
@@ -85,8 +77,8 @@ class Profile extends Component {
             <Segment.Group>
               {this.props.listings? this.props.listings.map(listing => {
                 return (
-                  <Segment key={listing.id}>
-                    <img src={`${process.env.REACT_APP_API_ENDPOINT}/${listing.avatars[0].thumb.url}`} alt='listing'/>
+                  <Segment>
+                    <img src={`${process.env.REACT_APP_API_ENDPOINT}/${listing.avatars[0].thumb.url}`} />
                     &nbsp;&nbsp;&nbsp;{listing.name}
                   </Segment>
                 )
@@ -103,7 +95,7 @@ class Profile extends Component {
               {this.props.reservations?
                 this.props.reservations.map(reservation => {
                 return (
-                  <Segment  secondary key={reservation.id}>
+                  <Segment  secondary>
                     <p>{reservation.check_in} - {reservation.check_out}</p>
                     <p>Guest number: {reservation.guest_number}</p>
                   </Segment>
@@ -122,7 +114,7 @@ class Profile extends Component {
               {this.props.trips?
                 this.props.trips.map(trip => {
                 return (
-                  <Segment  tertiary key={trip.id}>
+                  <Segment  tertiary>
                     <p>Destination: {trip.listing.name}</p>
                     <p>{trip.check_in} - {trip.check_out}</p>
                   </Segment>

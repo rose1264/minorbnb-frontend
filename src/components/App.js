@@ -16,16 +16,8 @@ import MyReservations from './MyReservations'
 import CreateReviewForm from './CreateReviewForm'
 import Home from './Home'
 import Footer from './Footer'
-import RelativeFooter from './RelativeFooter'
-import history from './history';
-import PropTypes from "prop-types";
 
 class App extends Component {
-
-  static propTypes = {
-    location: PropTypes.object.isRequired,
-  };
-
   componentDidMount() {
     if (this.props.location.pathname !== '/login'
     && this.props.location.pathname !== '/signup'
@@ -37,7 +29,7 @@ class App extends Component {
   render() {
     const loggedIn = this.props.user.loggedIn
     return (
-      <Router onUpdate={() => window.scrollTo(0, 0)} history={history} >
+      <Router>
         <Fragment>
           <NavigationBar />
           <Switch>
@@ -57,13 +49,7 @@ class App extends Component {
               <Route exact path="/reviews/new" component={CreateReviewForm} />
             </Fragment>
           ) : null}
-
-          {this.props.location.pathname !== "/listings" ?
-            <Footer />
-          :
-            <RelativeFooter />
-          }
-
+          <Footer />
         </Fragment>
       </Router>
     )

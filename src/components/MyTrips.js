@@ -20,14 +20,14 @@ class MyTrips extends Component {
   }
 
   render(){
-
+    
       if(this.props.addingReservation || this.props.addingReview){
         return <Loader active inline="centered" />
       } else {
         return (
           <Container>
             <h3>My Trips</h3>
-            {this.props.trips && this.props.trips.length !== 0 ?
+            {this.props.trips.length !== 0 ?
               <Feed>
                 {this.props.trips.map(trip => <Trip key={trip.id} trip={trip} />)}
               </Feed>

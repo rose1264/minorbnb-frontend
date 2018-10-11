@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = prop =>{
   return (
-    <div className='fixedfooter'>
+    <div className='footer'>
       <br/>
     &nbsp;&nbsp;  © 2018 MinorBnb, Inc. All Rights Reserved
       <br/>
