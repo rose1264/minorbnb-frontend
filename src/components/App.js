@@ -16,6 +16,7 @@ import MyReservations from './MyReservations'
 import CreateReviewForm from './CreateReviewForm'
 import Home from './Home'
 import Footer from './Footer'
+import history from './history'
 
 class App extends Component {
   componentDidMount() {
@@ -29,7 +30,7 @@ class App extends Component {
   render() {
     const loggedIn = this.props.user.loggedIn
     return (
-      <Router>
+      <Router history={history}>
         <Fragment>
           <NavigationBar />
           <Switch>

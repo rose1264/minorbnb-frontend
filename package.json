@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "google-map-react": "^1.0.9",
+    "history": "^4.7.2",
     "moment": "^2.22.2",
     "react": "^16.5.2",
     "react-dates": "^18.1.0",
