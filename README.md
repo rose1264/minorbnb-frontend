@@ -16,6 +16,7 @@ I was thinking about making this website last year when I first visited Flatiron
  - React Router
 
 ## Getting Start
+### <a href="https://github.com/rose1264/minorbnb-backend">First, download the backend of the project here</a>
  - Download or clone this repository
  - run 'npm install'
  - run 'atom .' or open other editor, create an .env file at the project root folder.
