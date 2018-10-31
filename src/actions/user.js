@@ -28,7 +28,7 @@ export const loginUser = (name, password) => {
         localStorage.setItem('jwt', JSONResponse.jwt)
         dispatch({ type: SET_CURRENT_USER, payload: JSONResponse.user })
       })
-      .catch(r => r.json().then(e => dispatch({ type: FAILED_LOGIN, payload: e.message })))
+      .catch(e => dispatch({ type: FAILED_LOGIN, payload: e.message }))
 
   }
 }
